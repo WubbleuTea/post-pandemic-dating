@@ -5,4 +5,4 @@
     Victor Lopez
     Annia Valdes
     Joshua Weisbrod-Torres
-    Jeremy White
+    Shane McFadden
