@@ -35,22 +35,31 @@ function showEvent(cityName) {
             console.log(data)
 
             //Ramdom  search event
-
-           // var index = posicion[Math.floor(Math.random() * (posicion.length - 1))];
-           // console.log("posicion",index)
+           var index = posicion[Math.floor(Math.random() * (posicion.length - 1))];
+            console.log("posicion",index)
 
             var titleLink=document.createElement("a")         
-            titleLink.setAttribute('href',data.events.event[1].url)
+            titleLink.setAttribute('href',data.events.event[index].url)
             titleLink.setAttribute('target','_blank')
-            titleLink.textContent=data.events.event[1].title;
+            titleLink.textContent=data.events.event[index].title;
+
+            
+            var descriptionEvent=document.createElement("p")
+            descriptionEvent.innerHTML =  data.events.event[index].description;
+
+            if (data.events.event[index].description===null ){
+                descriptionEvent.innerHTML= "Dear user we recommend you see more specifications of the event on the site 😏";
+              }
+              else{
+            descriptionEvent.innerHTML =  data.events.event[index].description;
+            console.log("descripcion", descriptionEvent);
+              }
 
             var dateStar=document.createElement("p")
-             dateStar.textContent=data.events.event[1].url
-             var divDescription=document.createElement("p")
-            divDescription=data.events.event[1].description;
-              console.log("descripcion",divDescription);
-            anniaEl.appendChild(titleLink)
-            anniaEl.appendChild(divDescription)
+            dateStar.textContent=data.events.event[index].
+                    
+           anniaEl.appendChild(titleLink)
+           anniaEl.appendChild(descriptionEvent)
 
         })
 
