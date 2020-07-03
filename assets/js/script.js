@@ -14,8 +14,9 @@ var inputState = "";
 submitButtonEl.addEventListener("click", function(event){
     event.preventDefault();
     inputCity = document.querySelector("input[name='city']").value.trim().toLowerCase();
+    inputState = stateSelectEl.value
     cityFormEl.reset();
-    console.log(inputCity);
+    console.log(inputCity, inputState);
 
 })
 
