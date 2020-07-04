@@ -8,16 +8,16 @@
     <link rel="stylesheet" href="./assets/css/style.css">
     <title>Post Pandemic Dating</title>
 </head>
-<body>
+<body class="blue-grey darken-4">
     <main class="container">
         <header class="row">
-            <img src="./assets/images/logo.png" class="col s2">
-            <h1 class="col s10">Post Pandemic Dating</h1>
+            <img src="./assets/images/logo.png" class="col s12 l2" width="50px">
+            <h1 class="col s12 l10">Post Pandemic Dating</h1>
         </header>
         <form id="city-form" class="row">
-            <input name="city" type="text" id="text-input" class="col s4">
-            <div class="col s2">
-                <select name="state" id="state-select">
+            <input name="city" type="text" id="text-input" class="col s12 l3">
+            <div class="col s12 l2 browser-default">
+                <select name="state" id="state-select" class="browser-default">
                     <option value="" selected="selected">Select a State</option>
                     <option value="AL">Alabama</option>
                     <option value="AK">Alaska</option>
@@ -72,22 +72,149 @@
                     <option value="WY">Wyoming</option>
                 </select>
             </div>
-            <button type="submit" id="submit-button" class="col s2"><i class="small material-icons">search</i>Select your city</button>
-            <button type="submit" id="delete-button" class="col s2"><i class="small material-icons">delete_forever</i>Delete your search history</button>
+            <button type="submit" id="submit-button" class="col s12 l3 waves-effect waves-light btn"><i class="small material-icons">search</i>Select your city</button>
+            <button type="submit" id="delete-button" class="col s12 l3 waves-effect waves-light red accent-4 btn"><i class="small material-icons">delete_forever</i>Delete your search history</button>
         </form>
+        <!-- buttons for past cities searched -->
+        <div id="past-cities"></div>
         <div class="divider"></div>
-        <div class="container row">
-            <div id="annia" class="col s9 card-panel teal lighten-2">Annia</div>
-            <div id="joshua" class="col s2 card-panel pink darken-1">Joshua</div>
-            <div id="shane" class="col s1 card-panel pink accent-1">Shane</div>
-            <!-- <div class="row">
-                <div id="joshua-two" class="col s2 offset-s10 card-panel pink darken-1">Joshua</div>
-            </div> -->
+        <!-- weather -->
+        <div class="row" id="weather">
+            <div id="joshua" class="col s12 card-panel pink darken-1">
+                <h3>Three Day Forcast</h3>
+                <div class="row" id="weather-row">
+                    <div class="col s12 m4"></div>
+                </div>  
+            </div>
         </div>
-        
+        <!-- Events and holiday -->
+        <div class="divider"></div>
         <div class="row">
-            <div id="tyler" class="col s9 card-panel pink accent-3">Tyler</div>
-            <div id="victor" class="col s3 card-panel pink accent-4">Victor</div>
+            <div id="annia" class="col s12 l9 card-panel teal lighten-2">
+                <h3>Events</h3>
+                <div class="row">
+                    <div class="col s12 m4">
+                        <div class="card blue-grey darken-1">
+                        <div class="card-content white-text">
+                            <span class="card-title">EVENT TITLE</span>
+                            <p>Description goes here</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="#">Click here for more information</a>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m4">
+                        <div class="card blue-grey darken-1">
+                        <div class="card-content white-text">
+                            <span class="card-title">Card Title</span>
+                            <p>I am a very simple card. I am good at containing small bits of information.
+                            I am convenient because I require little markup to use effectively.</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="#">This is a link</a>
+                            <a href="#">This is a link</a>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m4">
+                        <div class="card blue-grey darken-1">
+                        <div class="card-content white-text">
+                            <span class="card-title">Card Title</span>
+                            <p>I am a very simple card. I am good at containing small bits of information.
+                            I am convenient because I require little markup to use effectively.</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="#">This is a link</a>
+                            <a href="#">This is a link</a>
+                        </div>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+            <div id="shane" class="col s12 l3 card-panel pink accent-1">
+                <h3>Holidays</h3>
+
+                <div class="col s12">
+                    <div class="card blue-grey darken-1">
+                      <div class="card-content white-text">
+                        <span class="card-title">Card Title</span>
+                        <p>I am a very simple card. I am good at containing small bits of information.
+                        I am convenient because I require little markup to use effectively.</p>
+                      </div>
+                      <div class="card-action">
+                        <a href="#">This is a link</a>
+                        <a href="#">This is a link</a>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="row">
+            <div id="tyler" class="col s12 l9 card-panel pink accent-3">
+                <h3>Food</h3>
+                <div class="row">
+                    <div class="col s12 m4">
+                        <div class="card blue-grey darken-1">
+                        <div class="card-content white-text">
+                            <span class="card-title">Card Title</span>
+                            <p>I am a very simple card. I am good at containing small bits of information.
+                            I am convenient because I require little markup to use effectively.</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="#">This is a link</a>
+                            <a href="#">This is a link</a>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m4">
+                        <div class="card blue-grey darken-1">
+                        <div class="card-content white-text">
+                            <span class="card-title">Card Title</span>
+                            <p>I am a very simple card. I am good at containing small bits of information.
+                            I am convenient because I require little markup to use effectively.</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="#">This is a link</a>
+                            <a href="#">This is a link</a>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m4">
+                        <div class="card blue-grey darken-1">
+                        <div class="card-content white-text">
+                            <span class="card-title">Card Title</span>
+                            <p>I am a very simple card. I am good at containing small bits of information.
+                            I am convenient because I require little markup to use effectively.</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="#">This is a link</a>
+                            <a href="#">This is a link</a>
+                        </div>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+            <div id="victor" class="col s12 l3 card-panel pink accent-4">
+                <h3>Cocktail</h3>
+                <div class="col s12">
+                    <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                        <span class="card-title">Card Title</span>
+                        <p>I am a very simple card. I am good at containing small bits of information.
+                        I am convenient because I require little markup to use effectively.</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#">This is a link</a>
+                        <a href="#">This is a link</a>
+                    </div>
+                    </div>
+                </div>
+            </div> 
+            </div>
         </div>
             
            
