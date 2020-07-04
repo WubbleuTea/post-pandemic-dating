@@ -21,10 +21,13 @@ submitButtonEl.addEventListener("click", function (event) {
 
 })
 
+//list of event by city
+
 function showEvent(cityName) {
 
+    //key for the api
     var apikey = "4rwvR5WRLvh2Sb5c";
-    var posicion = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+   
 
     //call the API request
     fetch(`https://api.eventful.com/json/events/search?app_key=${apikey}&keywords=music&location=${cityName}&date=Today`)
@@ -34,50 +37,57 @@ function showEvent(cityName) {
         .then(function (data) {
             console.log(data)
 
-            //Ramdom  search event
-            var index = posicion[Math.floor(Math.random() * (posicion.length - 1))];
-            console.log("posicion", index)
-            
-            //create element for event name
-            var titleLink = document.createElement("a")
-            titleLink.setAttribute('href', data.events.event[index].url)
-            titleLink.setAttribute('target', '_blank')           
-            titleLink.innerHTML = data.events.event[index].title;
-            anniaEl.classList="display-info animation"
+            for (var i = 0; i < 3; i++) {
 
-             //create element for event description
-            var descriptionEvent = document.createElement("p")
+                //create element for event name
+                var titleLink = document.createElement("p")
+                var eventUrl = document.createElement("a")
+                var eventaddress = document.createElement("p")
+                eventUrl.setAttribute('href', data.events.event[i].url)
+                eventUrl.setAttribute('target', '_blank')
+                eventUrl.textContent = "Click here for more information";
+                titleLink.innerHTML = data.events.event[i].title;
+               // anniaEl.classList = 
 
-             //condicional for the event description is emty
-            if (data.events.event[index].description === null) {
-                descriptionEvent.innerHTML = "Dear user we recommend you, see more specifications of the event on the site 😏";
+                //create element for event description
+                var descriptionEvent = document.createElement("p")
+                //create element for star and close event
+                var dateStarClose = document.createElement("h6")
+
+
+                //conditional for the event don't have date for close event
+                if (data.events.event[i].stop_time === null || data.events.event[i].stop_time === " ") {
+
+                    dateStarClose.innerHTML = "Start date of the event:" + " " + data.events.event[i].start_time.split(" ")[0];
+                }
+                else {
+                    dateStarClose.innerHTML = "Start:" + " " + data.events.event[i].start_time.split(" ")[0] + " " +
+                        "End:" + " " + data.events.event[i].stop_time.split(" ")[0];
+                }
+
+
+                //condicional for the event description is emty
+                if (data.events.event[i].venue_address === null || data.events.event[i].venue_address === " ") {
+
+                    eventaddress.innerHTML = "Dear user we recommend you, see more specifications of the event on the site.Click on the event name 😏!!";
+                }
+                else {
+                    eventaddress.innerHTML = data.events.event[i].venue_address;
+
+                }
+
+                //show the information on the page
+                anniaEl.appendChild(titleLink)
+                anniaEl.appendChild(dateStarClose)
+                anniaEl.appendChild(eventaddress)
+                anniaEl.appendChild(eventUrl)
+
             }
-            else {
-                descriptionEvent.innerHTML = data.events.event[index].description;
-                console.log("descripcion", descriptionEvent);
-            }
-            //create element for star and close event
-            var dateStarClose = document.createElement("h6")
-
-            //conditional for the event don't have date for close event
-            if (data.events.event[index].stop_time === null) {
-                dateStarClose.innerHTML = "Start date of the event:" + " " + data.events.event[index].start_time.split(" ")[0];
-            }
-            else {
-                dateStarClose.innerHTML = "Start:"+" "+ data.events.event[index].start_time.split(" ")[0] +" " +
-               "End:"+ " "+ data.events.event[index].stop_time.split(" ")[0];
-            }
-
-            //clear the information
-            anniaEl.innerHTML= "";
-            
-            //show the information on the page
-            anniaEl.appendChild(titleLink)
-            anniaEl.appendChild(dateStarClose)
-            anniaEl.appendChild(descriptionEvent)
-
 
         })
-
+      //clear the information
+      anniaEl.innerHTML = "";  
 }
+
+  
 
