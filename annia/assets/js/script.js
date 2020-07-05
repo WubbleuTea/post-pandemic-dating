@@ -39,19 +39,25 @@ function showEvent(cityName) {
     
                 for (var i = 0; i < 3; i++) {
     
-                    //create element for event name
-                    var title = document.createElement("p")
-                    var eventUrl = document.createElement("a")
-                    //create element for star and close event
-                    var dateStarClose = document.createElement("p")                    
-                    var eventaddress = document.createElement("p")
-                    eventUrl.setAttribute('href', data.events.event[i].url)
-                    eventUrl.setAttribute('target', '_blank')
-                    eventUrl.textContent = "Click here for more information.";
-                    title.innerHTML = data.events.event[i].title;               
-                                         
+                    //create element for event Info
+                    var eventCity=document.createElement("div")
+                    var eventInfo=document.createElement("div")
+                    var divEventContainer=document.createElement("div")
+                    var divEventLink=document.createElement("div")
+
+                   //create element for show the event date
+                   var dateStarClose = document.createElement("p")
+
+                    //create element for show  the event address             
+                   var eventaddress = document.createElement("p")
+                 
+                    // class assignment
+                    eventCity.className="col s12 m4"   
+                    divEventContainer.className="card blue-grey darken-1 "                
+                    eventInfo.className="card-content white-text"  
+                    divEventLink.className="card-action"           
     
-                    //conditional for the event don't have date for close event
+                   //conditional for the event don't have date for close event
                     if (data.events.event[i].stop_time === null || data.events.event[i].stop_time === " ") {
     
                         dateStarClose.innerHTML = "Start date of the event:" + " " + data.events.event[i].start_time.split(" ")[0];
@@ -61,21 +67,32 @@ function showEvent(cityName) {
                             "End:" + " " + data.events.event[i].stop_time.split(" ")[0];
                     }
     
-    
-                    //condicional for the event address is emty
+                        //condicional for the event address is emty
                     if (data.events.event[i].venue_address === null || data.events.event[i].venue_address === " ") {
     
-                        eventaddress.innerHTML = " Address: Dear user we recommend you, see more specifications of the event on the site 😏!!";
+                        eventaddress.innerHTML= "Address: Dear user we recommend you, see more specifications of the event on the site 😏!!";
                     }
                     else {
                         eventaddress.innerHTML ="Address:"+" "+ data.events.event[i].venue_address+ ".";
                     }
-    
-                    // append the information for show  on the page
-                    anniaEl.appendChild(title)
-                    anniaEl.appendChild(dateStarClose)
-                    anniaEl.appendChild(eventaddress)
-                    anniaEl.appendChild(eventUrl)    
+
+                     //event url for see more info
+                    divEventLink.innerHTML="<a href ='"+ data.events.event[i].url +"'  target= _blank > Click here for more information. </a> "
+                    
+                     //event title
+                    eventInfo.innerHTML="<span class='card-title'> "+ data.events.event[i].title +"</span>";
+                    // event date
+                    eventInfo.appendChild(dateStarClose) 
+                    // event address
+                    eventInfo.appendChild(eventaddress) 
+                    //conatiner the event info
+                    divEventContainer.appendChild(eventInfo)
+                    divEventContainer.appendChild(divEventLink)
+                    //all info
+                    eventCity.appendChild(divEventContainer)
+                    //all info append on page
+                    anniaEl.appendChild(eventCity)
+                    
                 }
              })
         }else{
