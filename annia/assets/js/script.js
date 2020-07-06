@@ -21,16 +21,16 @@ var checkStorageCity = JSON.parse(localStorage.getItem("city"))
 var checkStorageState = JSON.parse(localStorage.getItem("state"))
 
 
-var createCity = function(){
+var createCity = function () {
     formErrorsEl.innerHTML = ""
     var buttonName = inputCity.replace(/(^\w|\s\w)/g, m => m.toUpperCase()) + "," + inputState
     var cityButton = document.createElement("button")
-        cityButton.className = "btn pink blue-grey"
-        cityButton.textContent = buttonName
+    cityButton.className = "btn pink blue-grey"
+    cityButton.textContent = buttonName
     pastCitiesEl.appendChild(cityButton);
     weatherRowEl.innerHTML = ""
 
-    cityButton.addEventListener("click", function(event){
+    cityButton.addEventListener("click", function (event) {
         event.preventDefault();
         formErrorsEl.innerHTML = ""
         weatherRowEl.innerHTML = "";
@@ -40,76 +40,77 @@ var createCity = function(){
         getWeather(false);
     })
 }
-var getWeather = function(weather){
-    fetch("https://api.weatherapi.com/v1/forecast.json?key=898f900d29334755948192951200207&days=3&hour=19&q=" + inputCity + "," + inputState).then(function(response){
+var getWeather = function (weather) {
+    fetch("https://api.weatherapi.com/v1/forecast.json?key=898f900d29334755948192951200207&days=3&hour=19&q=" + inputCity + "," + inputState).then(function (response) {
         if (response.ok) {
             formErrorsEl.innerHTML = ""
-            response.json().then(function(data) {
-            // if it is a new item push into arrays and local storage and create button
-            if (weather==true && !searchedCity.includes(inputCity) && data.location.country == "United States of America"){
-                searchedCity.push(inputCity)
-                localStorage.setItem("city", JSON.stringify(searchedCity))
-                searchedState.push(inputState);
-                localStorage.setItem("state", JSON.stringify(searchedState))
-                createCity();
-            } 
-            //if button is already made this will run
-           
-            //if not useable
-            if (data.location.country != "United States of America") {
-                var errorOne = document.createElement("div")
-                errorOne.className = "card col 12 red accent-4"
-                errorOne.innerHTML = "<h2>City is not in the USA</h2>"
-            formErrorsEl.appendChild(errorOne);
-                inputCity = ""
-                inputState = ""
-                cityFormEl.reset();
-                return
-            }
-            currentCityEl.innerHTML = "";
-            var currentCityTitle = document.createElement("div")
+            response.json().then(function (data) {
+                // if it is a new item push into arrays and local storage and create button
+                if (weather == true && !searchedCity.includes(inputCity) && data.location.country == "United States of America") {
+                    searchedCity.push(inputCity)
+                    localStorage.setItem("city", JSON.stringify(searchedCity))
+                    searchedState.push(inputState);
+                    localStorage.setItem("state", JSON.stringify(searchedState))
+                    createCity();
+                }
+                //if button is already made this will run
+
+                //if not useable
+                if (data.location.country != "United States of America") {
+                    var errorOne = document.createElement("div")
+                    errorOne.className = "card col 12 red accent-4"
+                    errorOne.innerHTML = "<h2>City is not in the USA</h2>"
+                    formErrorsEl.appendChild(errorOne);
+                    inputCity = ""
+                    inputState = ""
+                    cityFormEl.reset();
+                    return
+                }
+                currentCityEl.innerHTML = "";
+                var currentCityTitle = document.createElement("div")
                 currentCityTitle.className = ""
                 currentCityTitle.innerHTML = "<h2 class='col s12 card-panel pink lighten-1 center-align city-name'>" + inputCity.replace(/(^\w|\s\w)/g, m => m.toUpperCase()) + "," + inputState; + "</h2>"
                 currentCityEl.appendChild(currentCityTitle);
-           document.getElementById("weather").className = "row show"; 
-            //else run the weather forcast
-            for (var i=0; i< 3; i++) {
-                var getForecast = data.forecast.forecastday[i]
-              
-                var forecastDate = moment(getForecast.date).format("MM/DD/YYYY")
-                var weatherForecast = document.createElement("div")
+                document.getElementById("weather").className = "row show";
+                //else run the weather forcast
+                for (var i = 0; i < 3; i++) {
+                    var getForecast = data.forecast.forecastday[i]
+
+                    var forecastDate = moment(getForecast.date).format("MM/DD/YYYY")
+                    var weatherForecast = document.createElement("div")
 
                     weatherForecast.className = "col s12 m4";
-                    weatherForecast.innerHTML =  "<div class='card blue-grey darken-1 z-depth-5'>"+
+                    weatherForecast.innerHTML = "<div class='card blue-grey darken-1 z-depth-5'>" +
                         "<div class='card-content white-text'>" +
-                        "<span class='card-title'>"+ forecastDate + "</span>" + "<div><img src='//cdn.weatherapi.com/weather/64x64/day/" + getForecast.day.condition.icon.slice(-7) + "'/></div>" +
-                        "<p>High: "+ getForecast.day.maxtemp_f + "°F</p>"  +
-                        "<p>Low: " + getForecast.day.mintemp_f + "°F</p>" + 
+                        "<span class='card-title'>" + forecastDate + "</span>" + "<div><img src='//cdn.weatherapi.com/weather/64x64/day/" + getForecast.day.condition.icon.slice(-7) + "'/></div>" +
+                        "<p>High: " + getForecast.day.maxtemp_f + "°F</p>" +
+                        "<p>Low: " + getForecast.day.mintemp_f + "°F</p>" +
                         "<p>Rain: " + getForecast.day.daily_chance_of_rain + "%</p>" +
-                    "</div>" +
-                    "</div>"
-                weatherRowEl.appendChild(weatherForecast)
-                console.log(data)
-                console.log(data.forecast.forecastday[0].day.avgtemp_f)
-                
-            }
-            })  
+                        "</div>" +
+                        "</div>"
+                    weatherRowEl.appendChild(weatherForecast)
+                    console.log(data)
+                    console.log(data.forecast.forecastday[0].day.avgtemp_f)
 
+                }
+            })
+           
             // if recieved a error     
         } else {
             var errorOne = document.createElement("div")
-                errorOne.className = "col12 red accent-4"
-                errorOne.textContent = "Something did not work. Try again."
+            errorOne.className = "col12 red accent-4"
+            errorOne.textContent = "Something did not work. Try again."
             formErrorsEl.appendChild(errorOne);
             inputCity = ""
             inputState = ""
             cityFormEl.reset();
             return
         }
-        
+
     })
-    showEvent();
+   showEvent();
 }
+
 
 submitButtonEl.addEventListener("click", function(event){
     if (stateSelectEl.value == 0) {
@@ -121,8 +122,8 @@ submitButtonEl.addEventListener("click", function(event){
     inputState = stateSelectEl.value
     cityFormEl.reset();
     getWeather(true);
-}) 
 
+})
 
 
 //list of event by city     
@@ -131,90 +132,72 @@ function showEvent() {
 
     //key for the api
     var apikey = "4rwvR5WRLvh2Sb5c";
-   
+
     // call for show events card
     document.getElementById("events").className = "row show";
+
     //call the API request
-    //fetch(`https://api.eventful.com/json/events/search?app_key=${apikey}&keywords=music&location=${inputCity},${inputState}&date=Today`)
+    
     fetch(`https://api.eventful.com/json/events/search?app_key=${apikey}&keywords=music&location=${inputCity},${inputState}&date=Today`)
         .then(function (response) {
-                    
-        if(response.ok){
-           response.json().then(function (data) {
-                console.log(data)
-    
-                for (var i = 0; i < 3; i++) {
-    
-                    //create element for event Info
-                    var eventCity=document.createElement("div")
-                    var eventInfo=document.createElement("div")
-                    var divEventContainer=document.createElement("div")
-                    var divEventLink=document.createElement("div")
+            return response.json();
+        })
+        // if(response.ok){
+        // response.json()
+        .then(function (data) {
+            console.log(data)
 
-                   //create element for show the event date
-                   var dateStarClose = document.createElement("p")
+            for (var i = 0; i < 3; i++) {
 
-                    //create element for show  the event address             
-                   var eventaddress = document.createElement("p")
-                    // add title to eventInfo
-                    // class assignment
-                    eventCity.className="col s12 m4"   
-                    divEventContainer.className="card blue-grey z-depth-5"                
-                    eventInfo.className="card-content white-text"  
-                    divEventLink.className="card-action"           
-    
-                   //conditional for the event don't have date for close event
-                    if (data.events.event[i].stop_time === null || data.events.event[i].stop_time === " ") {                         
-                       dateStarClose.innerHTML = "Start date of the event:" + " " + moment(data.events.event[i].start_time.split(" ")[0]).format("MM/DD/YYYY");
-                    }
-                    else { 
-                        dateStarClose.innerHTML = "Start:" + " " + moment(data.events.event[i].start_time.split(" ")[0]).format("MM/DD/YYYY") + " " +
-                            "End:" + " " + moment(data.events.event[i].stop_time.split(" ")[0]).format("MM/DD/YYYY");
-                    }
-    
-                        //condicional for the event address is emty
-                    if (data.events.event[i].venue_address === null || data.events.event[i].venue_address === " ") {
-    
-                        eventaddress.innerHTML= "Address: Dear user more specifications on the site 😏";
-                    }
-                    else {
-                        eventaddress.innerHTML ="Address: " + data.events.event[i].venue_address+ ".";
-                    }
+                //create element for event Info
+                var eventCity = document.createElement("div")
 
-                     //event url for see more info
-                    divEventLink.innerHTML="<a href ='"+ data.events.event[i].url +"'  target= _blank > Click here for more information. </a> "
-                    
-                     //event title
-                    eventInfo.innerHTML= "<span class='card-title truncate'> "+ data.events.event[i].title +"</span>" ;
-                    // event date
-                    eventInfo.appendChild(dateStarClose) 
-                    // event address
-                    eventInfo.appendChild(eventaddress) 
-                    //conatiner the event info
-                    divEventContainer.appendChild(eventInfo)
-                    divEventContainer.appendChild(divEventLink)
-                    //all info
-                    eventCity.appendChild(divEventContainer)
-                    //all info append on page
-                    eventRowEl.appendChild(eventCity)
-                    
+                //create variable for show the event date
+                var dateStarClose;
+
+                //create variable for show  the event address             
+                var eventaddress;
+
+
+                //conditional for the event don't have date for close event
+                if (data.events.event[i].stop_time === null || data.events.event[i].stop_time === " ") {
+                    dateStarClose = "Start date of the event:" + " " + moment(data.events.event[i].start_time.split(" ")[0]).format("MM/DD/YYYY");
                 }
-             })
-        }else{
-            alert("Error connect to the API")
-        }
-    }).catch(function (error) {
+                else {
+                    dateStarClose = "Start:" + " " + moment(data.events.event[i].start_time.split(" ")[0]).format("MM/DD/YYYY") + " " +
+                        "End:" + " " + moment(data.events.event[i].stop_time.split(" ")[0]).format("MM/DD/YYYY");
+                }
+
+                //condicional for the event address is emty
+                if (data.events.event[i].venue_address === null || data.events.event[i].venue_address === " ") {
+
+                    eventaddress = "Address: Dear user more specifications on the site 😏";
+                }
+                else {
+                    eventaddress = "Address: " + data.events.event[i].venue_address + ".";
+                }
+
+                eventCity.innerHTML = `<div class='col s12 m4'><div class='card blue-grey darken-1 z-depth-5'><div class='card-content white-text'><span class='card-title truncate'>${data.events.event[i].title}</span><p>${dateStarClose}</p><p>${eventaddress}</p></div><div class='card-action'><a href ='${data.events.event[i].url}'  target= _blank > Click here for more information. </a><div></div></div></div></div>`
+                //all info append on page
+                eventRowEl.appendChild(eventCity)
+
+            }
+            //  })
+            /* }else{
+                 alert("Error connect to the API")
+             }*/
+        }) /* .catch(function (error) {
 
         alert("Error" + " " + error.statusText)
-      })
-      //clear the information
-      eventRowEl.innerHTML = "";  
+      })*/
+    //clear the information
+    eventRowEl.innerHTML = "";
 }
 
-  
+
 
 //deletes buttons created and local storage
-deleteButtonEl.addEventListener("click", function(){
+deleteButtonEl.addEventListener("click", function () {
     searchedCity = [];
     localStorage.setItem("city", "[]")
     localStorage.setItem("state", "[]")
@@ -224,21 +207,22 @@ deleteButtonEl.addEventListener("click", function(){
     cityFormEl.reset();
 })
 // gets local storage data and creates buttons for those items
-var oldSearchHistory = function() {
+var oldSearchHistory = function () {
     if (!checkStorageCity || !checkStorageState) {
-        return; 
+        return;
     } else {
         localStorage.clear();
-        for (var i =0; i < checkStorageCity.length; i++) {
-            searchedCity.push(checkStorageCity[i]); 
-            searchedState.push(checkStorageState[i]); 
+        for (var i = 0; i < checkStorageCity.length; i++) {
+            searchedCity.push(checkStorageCity[i]);
+            searchedState.push(checkStorageState[i]);
             inputCity = checkStorageCity[i].replace(/(^\w|\s\w)/g, m => m.toUpperCase());
             inputState = checkStorageState[i];
             createCity();
-        }  
+        }
         // puts all items made in for loop into localStorage
         localStorage.setItem("city", JSON.stringify(searchedCity));
         localStorage.setItem("state", JSON.stringify(searchedState))
-    }   
+    }
 }
+
 oldSearchHistory();
