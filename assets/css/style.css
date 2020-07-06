@@ -4,4 +4,13 @@
     padding: 0;
 }
 
+body {
+    width: auto;
+    padding-left: 2vh;
+    padding-right: 2vh;
+}
+
+h1 {
+    font-family: 'Galada', cursive;
+}
 
