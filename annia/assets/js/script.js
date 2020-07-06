@@ -3,6 +3,7 @@ var textInputEl = document.getElementById("text-input");
 var stateSelectEl = document.getElementById("state-select");
 var submitButtonEl = document.getElementById("submit-button");
 var deleteButtonEl = document.getElementById("delete-button");
+var eventRowEl = document.getElementById("event-row")
 var victorEl = document.getElementById("victor");
 var anniaEl = document.getElementById("annia");
 var shaneEl = document.getElementById("shane");
@@ -21,16 +22,17 @@ submitButtonEl.addEventListener("click", function (event) {
 
 })
 
-//list of event by city
+//list of event by city     
 
-function showEvent(cityName) {
+function showEvent() {
 
     //key for the api
     var apikey = "4rwvR5WRLvh2Sb5c";
    
-
+ //
     //call the API request
-    fetch(`https://api.eventful.com/json/events/search?app_key=${apikey}&keywords=music&location=${cityName}&date=Today`)
+    //fetch(`https://api.eventful.com/json/events/search?app_key=${apikey}&keywords=music&location=${inputCity}&date=Today`
+    fetch(`https://api.eventful.com/json/events/search?app_key=${apikey}&keywords=music&location=${inputCity}&date=Today`)
         .then(function (response) {
                     
         if(response.ok){
@@ -50,7 +52,7 @@ function showEvent(cityName) {
 
                     //create element for show  the event address             
                    var eventaddress = document.createElement("p")
-                 
+                    // add title to eventInfo
                     // class assignment
                     eventCity.className="col s12 m4"   
                     divEventContainer.className="card blue-grey darken-1 "                
@@ -58,11 +60,10 @@ function showEvent(cityName) {
                     divEventLink.className="card-action"           
     
                    //conditional for the event don't have date for close event
-                    if (data.events.event[i].stop_time === null || data.events.event[i].stop_time === " ") {
-    
-                        dateStarClose.innerHTML = "Start date of the event:" + " " + data.events.event[i].start_time.split(" ")[0];
+                    if (data.events.event[i].stop_time === null || data.events.event[i].stop_time === " ") {                         
+                       dateStarClose.innerHTML = "Start date of the event:" + " " + data.events.event[i].start_time.split(" ")[0];
                     }
-                    else {
+                    else { 
                         dateStarClose.innerHTML = "Start:" + " " + data.events.event[i].start_time.split(" ")[0] + " " +
                             "End:" + " " + data.events.event[i].stop_time.split(" ")[0];
                     }
@@ -70,17 +71,17 @@ function showEvent(cityName) {
                         //condicional for the event address is emty
                     if (data.events.event[i].venue_address === null || data.events.event[i].venue_address === " ") {
     
-                        eventaddress.innerHTML= "Address: Dear user we recommend you, see more specifications of the event on the site 😏!!";
+                        eventaddress.innerHTML= "Address:Dear user more specifications on the site 😏";
                     }
                     else {
-                        eventaddress.innerHTML ="Address:"+" "+ data.events.event[i].venue_address+ ".";
+                        eventaddress.innerHTML ="Address:"+ data.events.event[i].venue_address+ ".";
                     }
 
                      //event url for see more info
                     divEventLink.innerHTML="<a href ='"+ data.events.event[i].url +"'  target= _blank > Click here for more information. </a> "
                     
                      //event title
-                    eventInfo.innerHTML="<span class='card-title'> "+ data.events.event[i].title +"</span>";
+                    eventInfo.innerHTML= "<span class='card-title truncate'> "+ data.events.event[i].title +"</span>" ;
                     // event date
                     eventInfo.appendChild(dateStarClose) 
                     // event address
@@ -91,7 +92,7 @@ function showEvent(cityName) {
                     //all info
                     eventCity.appendChild(divEventContainer)
                     //all info append on page
-                    anniaEl.appendChild(eventCity)
+                    eventRowEl.appendChild(eventCity)
                     
                 }
              })
@@ -103,7 +104,7 @@ function showEvent(cityName) {
         alert("Error" + " " + error.statusText)
       })
       //clear the information
-      anniaEl.innerHTML = "";  
+      eventRowEl.innerHTML = "";  
 }
 
   
