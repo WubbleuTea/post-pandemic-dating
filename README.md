@@ -6,3 +6,11 @@
     Shane McFadden
     Annia Valdes
     Joshua Weisbrod-Torres
+
+## Used
+    HTML
+    CSS
+    JavaScript
+    Materialize
+    MomentJS
+    
