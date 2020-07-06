@@ -1,6 +1,10 @@
 :root {
     height: 100%;
 }
+body.modal-open {
+    height: 100vh;
+    overflow-y: hidden;
+}
 
 .container {
     width: auto;
@@ -11,6 +15,9 @@
 h1, h2, h3 {
     font-family: 'Galada', cursive;
 }
+h4 {
+    font-size: 3vh;
+}
 h2 {
     padding: 2vh;
 }
@@ -19,6 +26,12 @@ h3 .city-name{
 }
 button {
     margin: 1vh;
+}
+.modal-button {
+    padding:0 auto;
+}
+.modal {
+    overflow-y: hidden;
 }
 .card .card-content{
     padding: 5px

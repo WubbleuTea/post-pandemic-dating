@@ -15,8 +15,9 @@
             <img src="./assets/images/logo.png" class="col s12 l2 circle">
             <h1 class="col s12 l10 hide-on-small-only">Post Pandemic Dating</h1>
         </header>
+        <!-- city input -->
         <form id="city-form" class="row">
-
+            <!-- state input -->
             <input name="city" type="text" id="text-input" placeholder="Type city name here" class="col s12 l3">
             <div class="col s12 l2 browser-default">
                 <select name="state" id="state-select" class="browser-default">
@@ -74,18 +75,34 @@
                     <option value="WY">Wyoming</option>
                 </select>
             </div>
+            <!-- submit button -->
             <button type="submit" id="submit-button" class="col s12 l3 waves-effect waves-light btn pink lighten-1"><i class="small material-icons">search</i>Select your city</button>
-            <button type="submit" id="delete-button" class="col s12 l3 waves-effect waves-light red accent-4 btn"><i class="small material-icons">delete_forever</i>Delete your search history</button>
+            <!-- delete button -->
+            <button data-target="modal1" type="submit" class="col s12 l3 waves-effect waves-light red accent-4 btn modal-trigger"><i class="small material-icons">delete_forever</i>Delete your search history</button>
+                <!-- delete modal -->
+                <div id="modal1" class="modal">
+                    <div class="modal-content blue lighten-5">
+                        <h4 class="">Are you sure you want to permanently delete your searches?</h4>
+                    </div>
+                    <div class="modal-footer blue lighten-5">
+                        <div class="row">
+                            <a href="#!" class="modal-close waves-effect waves-green red btn col s12 modal-button" id="delete-button">Yes, please delete</a>
+                        </div>
+                        <div class="row">
+                            <a href="#!" class="modal-close waves-effect waves-green blue btn col s12 modal-button">No, keep my history</a>
+                        </div>
+                    </div>
+                </div>
         </form>
         <!-- buttons for past cities searched -->
         <div id="past-cities"></div>
-        <div id="form-errors"></div>
+        <div id="form-errors"></div>        
+
+      <!-- current city container   -->
         <div id="current-city"></div>
         <div class="divider"></div>
-        
      
         <!-- weather -->
-
         <div class="row hide" id="weather">
             <div id="joshua" class="col s12 card-panel pink lighten-4">
                 <h3>Three Day Forecast</h3>
@@ -93,6 +110,8 @@
             </div>
         </div>
         <div class="divider"></div>
+
+        <!--holiday-->
         <div class="row" id="holiday">
             <div id="shane" class="col s12 card-panel pink lighten-1">
                 <h3>Holidays</h3>
@@ -107,7 +126,7 @@
                 </div>
             </div>
             </div>
-         <!-- event row-->   
+ 
         <!-- Events-->
         <div class="divider"></div>
         <div class="row" id="events">
@@ -154,10 +173,9 @@
                 </div> 
             </div>
         </div>
-  
-
         <div class="divider"></div>
 
+        <!--food-->
         <div class="row" id="food">
             <div id="tyler" class="col s12 card-panel pink lighten-1 z-depth-5">
                 <h3>Food</h3>
@@ -205,6 +223,8 @@
             </div>
              
             </div>
+
+            <!--food-->
             <div class="row hide" id="cocktail">
                 <div id="victor" class="col s12 card-panel pink lighten-4 z-depth-5">
                     <h3>Cocktail</h3>
@@ -228,7 +248,7 @@
            
             
     </main>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>
