@@ -44,10 +44,18 @@ button {
 .modal {
     overflow-y: hidden;
 }
+
 .card .card-content{
     padding: 5px
 }
 .card .card-title {
     font-size: 20px;
     font-family: 'Galada', cursive;
+}
+
+/*animation card*/
+.card:hover {
+    -webkit-transform:scale(1.1);transform:scale(1.1);
+    box-shadow: 0 0 10px rgb(233, 127, 127);
+      
 }
