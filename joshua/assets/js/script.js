@@ -13,20 +13,21 @@ var joshuaEl = document.getElementById("joshua");
 var weatherRowEl = document.getElementById("weather-row")
 var formErrorsEl = document.getElementById("form-errors")
 var currentCityEl = document.getElementById("current-city")
+var mainPageEl = document.getElementById("main-page")
 var inputCity = "";
 var inputState = "";
 var submitArr =[];
 var checkStorage = JSON.parse(localStorage.getItem("searched"))
 
-
+// create button for city,state
 var createCity = function(){
     formErrorsEl.innerHTML = ""
     var buttonName = inputCity.replace(/(^\w|\s\w)/g, m => m.toUpperCase()) + "," + inputState
-    var cityButton = document.createElement("button")
-        cityButton.className = "btn blue-grey"
-        cityButton.textContent = buttonName
+    var cityButton = document.createElement("button");
+        cityButton.className = "btn blue-grey";
+        cityButton.textContent = buttonName;
     pastCitiesEl.appendChild(cityButton);
-    weatherRowEl.innerHTML = ""
+    weatherRowEl.innerHTML = "";
 
     cityButton.addEventListener("click", function(event){
         event.preventDefault();
@@ -38,7 +39,7 @@ var createCity = function(){
         getWeather(false);
     })
 }
-
+// get weather for city
 var getWeather = function(weather){
     fetch("https://api.weatherapi.com/v1/forecast.json?key=898f900d29334755948192951200207&days=3&hour=19&q=" + inputCity + "," + inputState).then(function(response){
         if (response.ok) {
@@ -111,14 +112,51 @@ var getWeather = function(weather){
 
 // submit button
 submitButtonEl.addEventListener("click", function(event){
-    if (stateSelectEl.value == 0) {
-        var errorTwo = document.createElement("div")
-                errorTwo.className = "col12 red accent-4"
-                errorTwo.textContent = "Please select a State"
-            formErrorsEl.appendChild(errorTwo);
-        formEl.reset();
-    }
     event.preventDefault();
+    // checks to see if any content field is empty
+    if (stateSelectEl.value == 0 && textInputEl.value == "") {
+        // alert("You missed a perameter try again")
+        var elem = document.getElementById("modal2")
+        console.log(elem)
+        document.getElementById("alertText").textContent = "Please add a city and state"
+        var instance = M.Modal.getInstance(elem);
+        instance.open()
+         formEl.reset();
+        // add onclick to close and clean the alertext element
+        var close = document.querySelector("#closeModal")
+        close.addEventListener("click", function () {
+            instance.close();
+            document.getElementById("alertText").textContent = " ";
+        })
+    } else if (textInputEl.value == "") {
+        // alert("You missed a perameter try again")
+        var elem = document.getElementById("modal2")
+        console.log(elem)
+        document.getElementById("alertText").textContent = "Please add a city"
+        var instance = M.Modal.getInstance(elem);
+        instance.open()
+         formEl.reset();
+        // add onclick to close and clean the alertext element
+        var close = document.querySelector("#closeModal")
+        close.addEventListener("click", function () {
+            instance.close();
+            document.getElementById("alertText").textContent = " ";
+        })
+    } else if (stateSelectEl.value == 0) {
+        // alert("You missed a perameter try again")
+        var elem = document.getElementById("modal2")
+        console.log(elem)
+        document.getElementById("alertText").textContent = "Please add a state"
+        var instance = M.Modal.getInstance(elem);
+        instance.open()
+         formEl.reset();
+        // add onclick to close and clean the alertext element
+        var close = document.querySelector("#closeModal")
+        close.addEventListener("click", function () {
+            instance.close();
+            document.getElementById("alertText").textContent = " ";
+        })
+    };
     inputCity = document.querySelector("input[name='city']").value.trim().toLowerCase();
     inputState = stateSelectEl.value
     cityFormEl.reset();
@@ -130,7 +168,7 @@ submitButtonEl.addEventListener("click", function(event){
 document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('.modal');
     M.Modal.init(elems, {});
-    });
+});
 
 
 //deletes buttons created and local storage
@@ -141,8 +179,18 @@ deleteButtonEl.addEventListener("click", function(){
     inputState = ""
     pastCitiesEl.innerHTML = "";
     cityFormEl.reset();
-
+    resetPage();
 })
+
+var resetPage = function(){
+    document.getElementById("form-errors").className = "row hide"; 
+    currentCityEl.className = "row hide"; 
+    document.getElementById("weather").className = "row hide"; 
+    document.getElementById("holiday").className = "row hide"; 
+    document.getElementById("events").className = "row hide"; 
+    document.getElementById("food").className = "row hide"; 
+    document.getElementById("cocktail").className = "row hide"; 
+}
 
 // gets local storage data and creates buttons for those items
 var oldSearchHistory = function() {
