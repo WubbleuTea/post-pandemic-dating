@@ -223,7 +223,7 @@ function showEvent() {
 
                 eventCity.innerHTML = `<div class='col s12 m4'><div class='card  blue-grey darken-1 z-depth-5'><div class='card-content white-text'>
                 <span class='card-title truncate'>${data.events.event[i].title}</span><p>${dateStarClose}</p>
-                <p>${eventaddress}</p></div><div class='card-action'><a href ='${data.events.event[i].url}' target= _blank > Click here for more information. </a>
+                <p class='truncate'>${eventaddress}</p></div><div class='card-action'><a href ='${data.events.event[i].url}' target= _blank > Click here for more information. </a>
                 <div></div></div></div></div>`
 
                 //all info append on page
