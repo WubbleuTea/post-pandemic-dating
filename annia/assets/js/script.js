@@ -203,7 +203,6 @@ function showEvent() {
                 //create variable for show  the event address             
                 var eventaddress;
 
-
                 //conditional for the event don't have date for close event
                 if (data.events.event[i].stop_time === null || data.events.event[i].stop_time === " ") {
                     dateStarClose = "Start date of the event:" + " " + moment(data.events.event[i].start_time.split(" ")[0]).format("MM/DD/YYYY");
