@@ -12,6 +12,12 @@ var weatherRowEl = document.getElementById("weather-row")
 var formErrorsEl = document.getElementById("form-errors")
 var currentCityEl = document.getElementById("current-city")
 var mainPageEl = document.getElementById("main-page")
+var drinkPicEl = document.getElementById("drinkImg");
+var drinkNameEl = document.getElementById("drinkName");
+var drinkGlassEl = document.getElementById("drinkGlass");
+var drinkInsEl = document.getElementById("drinkIns");
+var differentDrinkEl = document.getElementById("drink-button");
+var drinkIngredientEl = document.getElementById("drinkIngredients");
 var inputCity = "";
 var inputState = "";
 var submitArr =[];
@@ -116,6 +122,7 @@ var getWeather = function(weather){
         }
     })
     showEvent();
+    drinkHandler();
 }
 
 //list of event by city     
@@ -136,7 +143,7 @@ function showEvent() {
             return response.json();
         })
         
-        .then(function (data) {
+        .then(function(data) {
             console.log(data)
 
             for (var i = 0; i < 3; i++) {
@@ -168,7 +175,7 @@ function showEvent() {
                     eventaddress = "Address: " + data.events.event[i].venue_address + ".";
                 }
 
-                eventCity.innerHTML = `<div class='col s12 m4'><div class='card  blue-grey darken-1 z-depth-5'><div class='card-content white-text'>
+                eventCity.innerHTML = `<div class='col s12 m4'><div class='card blue-grey darken-1 z-depth-5'><div class='card-content white-text'>
                 <span class='card-title truncate'>${data.events.event[i].title}</span><p>${dateStarClose}</p>
                 <p class='truncate'>${eventaddress}</p></div><div class='card-action'><a href ='${data.events.event[i].url}' target= _blank > Click here for more information. </a>
                 <div></div></div></div></div>`
@@ -179,8 +186,72 @@ function showEvent() {
             }
            
         })
-
 }
+
+var drinkHandler = function(event) {             
+    // var cityName = inputEl.value.trim();
+    // console.log(cityName)
+    document.getElementById("cocktail").className = "row show"
+    fetch("https://www.thecocktaildb.com/api/json/v1/1/random.php").then(function(response) {
+        response.json().then(function(data) {
+            console.log(data);
+
+            var drinkType = data.drinks[0].strAlcoholic;
+            console.log(drinkType);
+
+            // this checks to make sure the drink is alcoholic
+            if (drinkType == "Non alcoholic" || drinkType == "Optional alcohol") {
+                drinkHandler(event);
+             };
+            // information form the API is being added to the index.html 
+            var drinkName = data.drinks[0].strDrink;
+            // console.log(drinkName);
+            drinkNameEl.innerHTML = "<h3>" + drinkName + "</h3>";
+            
+            var drinkImg = data.drinks[0].strDrinkThumb;
+            // console.log(drinkImg);
+            drinkPicEl.setAttribute("src",drinkImg);
+            
+            var drinkGlass = data.drinks[0].strGlass;
+            // console.log(drinkGlass);
+            drinkGlassEl.innerHTML = "The "+ drinkName + " is served in a " + drinkGlass+".";
+            
+            var drinkInstructions = data.drinks[0].strInstructions;
+            // console.log(drinkInstructions);
+            drinkInsEl.innerHTML = drinkInstructions;
+
+            var i=1;
+            
+            // object bracket notation
+             while (data.drinks[0]["strIngredient"+i]) {
+                    console.log(data.drinks[0]["strMeasure"+i],data.drinks[0]["strIngredient"+i]);
+                    var drinkItem = data.drinks[0]["strMeasure"+i] + " - " + data.drinks[0]["strIngredient"+i];
+                   console.log("drink Item is" ,drinkItem);
+                //    drinkIngredientEl.createElement("p")
+                //    var drinkItemEl = document.createElement("p");
+                //    var elementId = "id"[i];
+                //    console.log(elementId);
+                   
+                //    drinkItemEl.setAttribute("id",i)
+                //     drinkItemEl.innerHTML = drinkItem;
+                   
+                   // var addDrinkItem = function( id="drinkIngredients", data) {
+                       
+                    //     }
+                        
+                    //     
+                    //     drinkItemEl.innerHTML = drinkItem;
+                        
+                    //     drinkIngredientEl.innerHTML = drinkItem;
+                    
+                    // addDrinkItem("drinkIngredients", drinkItem);
+                    i++;
+                    
+             };
+        })
+
+    })
+};
 
 // submit button
 submitButtonEl.addEventListener("click", function(event){
@@ -263,6 +334,11 @@ var resetPage = function(){
     document.getElementById("food").className = "row hide"; 
     document.getElementById("cocktail").className = "row hide"; 
 }
+
+// inputEl.addEventListener("click", drinkHandler);//this initiates the drink
+differentDrinkEl.addEventListener("click", function(){
+    drinkHandler()
+});
 
 // gets local storage data and creates buttons for those items
 var oldSearchHistory = function() {
