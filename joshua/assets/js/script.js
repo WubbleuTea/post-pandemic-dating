@@ -57,10 +57,19 @@ var getWeather = function(weather){
         
             //if the city and state combination is not useable
             if (data.location.country != "United States of America") {
-                var errorOne = document.createElement("div")
-                errorOne.className = "card col 12 red accent-4"
-                errorOne.innerHTML = "<h2>City is not in the USA, please try again</h2>"
-            formErrorsEl.appendChild(errorOne);
+             // alert("You missed a perameter try again")
+                var elem = document.getElementById("modal2")
+                console.log(elem)
+                document.getElementById("alertText").textContent = "This is not a city in the United States of America. Please try again."
+                var instance = M.Modal.getInstance(elem);
+                instance.open()
+                formEl.reset();
+                // add onclick to close and clean the alertext element
+                var close = document.querySelector("#closeModal")
+                close.addEventListener("click", function () {
+                    instance.close();
+                    document.getElementById("alertText").textContent = " ";
+                })
                 inputCity = ""
                 inputState = ""
 
@@ -70,7 +79,7 @@ var getWeather = function(weather){
             currentCityEl.innerHTML = "";
             var currentCityTitle = document.createElement("div")
                 currentCityTitle.className = ""
-                currentCityTitle.innerHTML = "<h2 class='col s12 card-panel pink lighten-1 center-align city-name'>" + inputCity.replace(/(^\w|\s\w)/g, m => m.toUpperCase()) + "," + inputState; + "</h2>"
+                currentCityTitle.innerHTML = "<h2 class='col s12 card-panel pink lighten-4 center-align city-name'>" + inputCity.replace(/(^\w|\s\w)/g, m => m.toUpperCase()) + "," + inputState; + "</h2>"
                 currentCityEl.appendChild(currentCityTitle);
            document.getElementById("weather").className = "row show"; 
             //else run the weather forcast
@@ -184,7 +193,7 @@ deleteButtonEl.addEventListener("click", function(){
 
 var resetPage = function(){
     document.getElementById("form-errors").className = "row hide"; 
-    currentCityEl.className = "row hide"; 
+    currentCityEl.innerHTML = ""; 
     document.getElementById("weather").className = "row hide"; 
     document.getElementById("holiday").className = "row hide"; 
     document.getElementById("events").className = "row hide"; 

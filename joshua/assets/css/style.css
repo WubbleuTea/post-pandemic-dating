@@ -5,6 +5,10 @@ body.modal-open {
     height: 100vh;
     overflow-y: hidden;
 }
+body {
+    padding-left: 2vh;
+    padding-right: 2vh
+}
 header {
     justify-content: center;
 
@@ -50,4 +54,15 @@ button {
 .card .card-title {
     font-size: 20px;
     font-family: 'Galada', cursive;
+}
+.card:hover {
+    -webkit-transform:scale(1.1);transform:scale(1.1);
+    box-shadow: 0 0 10px rgb(233, 127, 127);     
+}
+.gradient-right{
+    background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1))
+}
+
+.gradient-left{
+    background-image: linear-gradient(to left, rgba(255,0,0,0), rgba(255,0,0,1))
 }

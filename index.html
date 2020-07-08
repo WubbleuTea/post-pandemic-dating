@@ -3,17 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Galada&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="./assets/css/style.css">
-    <title>Post Pandemic Dating</title>
+    <title>MaskD</title>
 </head>
-<body>
-    <main>
-        <h1>Post Pandemic Dating</h1>
-        <form id="city-form">
-            <input name="city" type="text" id="text-input">
-            <div class="custom-select" style="width:200px;">
-                <select name="state" id="state-select">
+<body class="blue lighten-5 center-align">
+    <section class="container">
+        <header class="row">
+            <img src="./assets/images/logo.png" class="col s12 l2 circle logo">
+            <h1 class="col s12 l10 hide-on-small-only">Post Pandemic Dating</h1>
+        </header>
+        <!-- city input -->
+        <form id="city-form" class="row">
+            <!-- state input -->
+            <input name="city" type="text" id="text-input" placeholder="Type city name here" class="col s12 l3">
+            <div class="col s12 l2 browser-default">
+                <select name="state" id="state-select" class="browser-default">
                     <option value="" selected="selected">Select a State</option>
                     <option value="AL">Alabama</option>
                     <option value="AK">Alaska</option>
@@ -66,18 +73,192 @@
                     <option value="WV">West Virginia</option>
                     <option value="WI">Wisconsin</option>
                     <option value="WY">Wyoming</option>
-                  </select>
-              </div>
-            <input type="submit" id="submit-button">
-            <input type="submit" id="delete-button">
+                </select>
+            </div>
+            <!-- submit button -->
+            <button type="submit" id="submit-button" class="col s12 l3 waves-effect waves-light btn pink lighten-4 black-blue-grey"><i class="small material-icons">search</i>Select your city</button>
+            <!-- delete button -->
+            <button data-target="modal1" type="submit" class="col s12 l3 waves-effect waves-light red accent-4 btn modal-trigger"><i class="small material-icons">delete_forever</i>Delete your search history</button>
+                <!-- delete modal -->
+                <div id="modal1" class="modal">
+                    <div class="modal-content blue lighten-5">
+                        <h4 class="">Are you sure you want to permanently delete your searches?</h4>
+                    </div>
+                    <div class="modal-footer blue lighten-5">
+                        <div class="row">
+                            <a href="#!" class="modal-close waves-effect waves-green red btn col s12 modal-button" id="delete-button">Yes, please delete</a>
+                        </div>
+                        <div class="row">
+                            <a href="#!" class="modal-close waves-effect waves-green blue btn col s12 modal-button">No, keep my history</a>
+                        </div>
+                    </div>
+                </div>
         </form>
-        <div id="victor"></div>
-        <div id="tyler"></div>
-        <div id="annia"></div>
-        <div id="joshua"></div>
-        <div id="shane"></div>
-    </main>
+        <!--error modals-->
+        <div id="modal2" class="modal">
+            <div class="modal-content blue lighten-5">
+              <h4 id="alertText"></h4>
+            </div>
+            <div class="modal-footer blue lighten-5">
+              <a id="closeModal" href="#!" class="modal-close waves-effect waves-green blue-grey btn col s12 modal-button">Close</a>
+            </div>
+          </div>
+        <!-- buttons for past cities searched -->
+        <div id="past-cities"></div>
+        <div id="form-errors"></div>
+    </section>        
+    <main id="main-page">
+      <!-- current city container   -->
+        <div id="current-city"></div>
+        <div class="divider"></div>
+     
+        <!-- weather -->
+        <div class="row hide" id="weather">
+            <div id="joshua" class="col s12 card-panel pink lighten-4 gradient-right">
+                <h3>Three Day Forecast</h3>
+                <div class="row" id="weather-row"></div>  
+            </div>
+        </div>
+        <div class="divider"></div>
 
+        <!--holiday-->
+        <div class="row" id="holiday">
+            <div id="shane" class="col s12 card-panel pink lighten-1 gradient-left">
+                <h3>Holidays</h3>
+                <div class="col s12" id="holiday">
+                    <div class="card blue-grey">
+                      <div class="card-content white-text">
+                        <span class="card-title">Card Title</span>
+                        <p>I am a very simple card. I am good at containing small bits of information.
+                        I am convenient because I require little markup to use effectively.</p>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+ 
+        <!-- Events-->
+        <div class="divider"></div>
+        <div class="row" id="events">
+            <div id="annia" class="col s12 card-panel pink lighten-4 gradient-right">
+                <h3>Events</h3>
+                <div class="row" id="event-row">
+                    <div class="col s12 m4">
+                        <div class="card medium blue-grey darken-1 z-depth-5">
+                        <div class="card-content white-text">
+                            <span class="card-title">EVENT TITLE</span>
+                            <p>Description goes here</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="#">Click here for more information</a>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m4">
+                        <div class="card small blue-grey darken-1 z-depth-5">
+                            <div class="card-content white-text">
+                                <span class="card-title">Card Title</span>
+                                <p>I am a very simple card. I am good at containing small bits of information.
+                                I am convenient because I require little markup to use effectively.</p>
+                            </div>
+                            <div class="card-action">
+                                <a href="#">This is a link</a>
+                                <a href="#">This is a link</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m4">
+                        <div class="card medium blue-grey darken-1 z-depth-5">
+                        <div class="card-content white-text">
+                            <span class="card-title">Card Title</span>
+                            <p>I am a very simple card. I am good at containing small bits of information.
+                            I am convenient because I require little markup to use effectively.</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="#">This is a link</a>
+                            <a href="#">This is a link</a>
+                        </div>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div>
+        <div class="divider"></div>
+
+        <!--food-->
+        <div class="row hide" id="food">
+            <div id="tyler" class="col s12 card-panel pink lighten-1 gradient-left">
+                <h3>Food</h3>
+                <div class="row" id="food-row">
+                    <div class="col s12 l4">
+                        <div class="card blue-grey z-depth-5">
+                        <div class="card-content white-text">
+                            <span class="card-title">Card Title</span>
+                            <p>I am a very simple card. I am good at containing small bits of information.
+                            I am convenient because I require little markup to use effectively.</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="#">This is a link</a>
+                            <a href="#">This is a link</a>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col s12 l4">
+                        <div class="card blue-grey z-depth-5">
+                        <div class="card-content white-text">
+                            <span class="card-title">Card Title</span>
+                            <p>I am a very simple card. I am good at containing small bits of information.
+                            I am convenient because I require little markup to use effectively.</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="#">This is a link</a>
+                            <a href="#">This is a link</a>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col s12 l4">
+                        <div class="card blue-grey z-depth-5">
+                        <div class="card-content white-text">
+                            <span class="card-title">Card Title</span>
+                            <p>I am a very simple card. I am good at containing small bits of information.
+                            I am convenient because I require little markup to use effectively.</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="#">This is a link</a>
+                            <a href="#">This is a link</a>
+                        </div>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+             
+            </div>
+
+            <!--food-->
+            <div class="row hide" id="cocktail">
+                <div id="victor" class="col s12 card-panel pink lighten-4 z-depth-5 gradient-right">
+                    <h3>Cocktail</h3>
+                    <div class="col s12">
+                        <div class="card blue-grey darken-1">
+                        <div class="card-content white-text">
+                            <span class="card-title">Card Title</span>
+                            <p>I am a very simple card. I am good at containing small bits of information.
+                            I am convenient because I require little markup to use effectively.</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="#">This is a link</a>
+                            <a href="#">This is a link</a>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            
+           
+            
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>
