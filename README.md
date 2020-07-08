@@ -58,6 +58,7 @@ A cocktail is shown to the user, if it is not to his liking or if he wishes to s
     MomentJS
     Google fonts
     Google icons
+    Github
     
    ### APIS
     -WeatherAPI

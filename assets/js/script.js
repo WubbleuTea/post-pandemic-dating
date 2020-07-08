@@ -8,7 +8,6 @@ var victorEl = document.getElementById("victor");
 var eventRowEl = document.getElementById("event-row");
 var holidayInfoEl = document.getElementById("holiday-info");
 var tylerEl = document.getElementById("tyler");
-var joshuaEl = document.getElementById("joshua");
 var weatherRowEl = document.getElementById("weather-row")
 var formErrorsEl = document.getElementById("form-errors")
 var currentCityEl = document.getElementById("current-city")

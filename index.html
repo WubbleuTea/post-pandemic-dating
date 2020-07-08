@@ -16,13 +16,16 @@
             <img src="./assets/images/logo.png" class="col s12 l2 circle logo">
             <h1 class="col s12 l10 hide-on-small-only">Post Pandemic Dating</h1>
         </header>
-        <!-- city input -->
+
+        <!--user input-->
         <form id="city-form" class="row">
-            <!-- state input -->
-            <input name="city" type="text" id="text-input" placeholder="Type city name here" class="col s12 l3">
+
+           <!-- city input -->
+            <input name="city" type="text" id="text-input" placeholder="Type city name here and select state from the dropdown" class="col s12 l3">
+             <!-- state input -->
             <div class="col s12 l2 browser-default">
                 <select name="state" id="state-select" class="browser-default">
-                    <option value="" selected="selected">Select a State</option>
+                    <option value="" selected="selected">State</option>
                     <option value="AL">Alabama</option>
                     <option value="AK">Alaska</option>
                     <option value="AZ">Arizona</option>
@@ -77,23 +80,9 @@
                 </select>
             </div>
             <!-- submit button -->
-            <button type="submit" id="submit-button" class="col s12 l3 waves-effect waves-light btn pink lighten-4 black-blue-grey"><i class="small material-icons">search</i>Select your city</button>
+            <button type="submit" id="submit-button" class="col s12 l3 waves-effect waves-light btn pink lighten-4 blue-grey-text text-darken-4 "><i class="small material-icons">search</i>Select your city</button>
             <!-- delete button -->
             <button data-target="modal1" type="submit" class="col s12 l3 waves-effect waves-light red accent-4 btn modal-trigger"><i class="small material-icons">delete_forever</i>Delete your search history</button>
-                <!-- delete modal -->
-                <div id="modal1" class="modal">
-                    <div class="modal-content blue lighten-5">
-                        <h4 class="">Are you sure you want to permanently delete your searches?</h4>
-                    </div>
-                    <div class="modal-footer blue lighten-5">
-                        <div class="row">
-                            <a href="#!" class="modal-close waves-effect waves-green red btn col s12 modal-button" id="delete-button">Yes, please delete</a>
-                        </div>
-                        <div class="row">
-                            <a href="#!" class="modal-close waves-effect waves-green blue btn col s12 modal-button">No, keep my history</a>
-                        </div>
-                    </div>
-                </div>
         </form>
         <!--error modals-->
         <div id="modal2" class="modal">
@@ -104,18 +93,35 @@
               <a id="closeModal" href="#!" class="modal-close waves-effect waves-green blue-grey btn col s12 modal-button">Close</a>
             </div>
           </div>
+            <!-- delete modal -->
+            <div id="modal1" class="modal">
+                <div class="modal-content blue lighten-5">
+                    <h4 class="">Are you sure you want to permanently delete your searches?</h4>
+                </div>
+                <div class="modal-footer blue lighten-5">
+                    <div class="row">
+                        <a href="#!" class="modal-close waves-effect waves-green red btn col s12 modal-button" id="delete-button">Yes, please delete</a>
+                    </div>
+                    <div class="row">
+                        <a href="#!" class="modal-close waves-effect waves-green blue btn col s12 modal-button">No, keep my history</a>
+                    </div>
+                </div>
+            </div>
+
         <!-- buttons for past cities searched -->
         <div id="past-cities"></div>
         <div id="form-errors"></div>
-    </section>        
+    </section>     
+
     <main id="main-page">
-      <!-- current city container   -->
+
+      <!-- current city container -->
         <div id="current-city"></div>
 
      
         <!-- weather -->
         <div class="row hide" id="weather">
-            <div id="weather-container" class="col s12 card-panel pink lighten-4 gradient-right">
+            <div class="col s12 card-panel pink lighten-4 gradient-right">
                 <h3>Three Day Forecast</h3>
                 <div class="row" id="weather-row"></div>  
             </div>
@@ -123,7 +129,7 @@
 
 
         <!--holiday-->
-        <div class="row" id="holiday">
+        <div class="row hide" id="holiday">
             <div id="shane" class="col s12 card-panel pink lighten-1 gradient-left">
                 <h3>Holidays</h3>
                 <div class="col s12" id="holiday">
@@ -140,7 +146,6 @@
 
  
         <!-- Events-->
-
         <div class="row hide" id="events">
             <div class="col s12 card-panel pink lighten-4 gradient-right">
                 <h3>Events</h3>
@@ -149,10 +154,10 @@
         </div>
   
 
-        <!--food-->
+        <!--Resturants/Food-->
         <div class="row hide" id="food">
             <div id="tyler" class="col s12 card-panel pink lighten-1 gradient-left">
-                <h3>Food</h3>
+                <h3>Resturantes/Food</h3>
                 <div class="row" id="food-row">
                     <div class="col s12 l4">
                         <div class="card blue-grey z-depth-5">
@@ -171,7 +176,7 @@
             </div> 
         </div>
 
-            <!--food-->
+            <!--Cocktail-->
             <div class="row hide" id="cocktail">
                 <div id="victor" class="col s12 card-panel pink lighten-4 z-depth-5 gradient-right">
                     <h3>Cocktail</h3>
@@ -190,11 +195,23 @@
                     </div>
                 </div>
             </div>
-        </div>
-            
-           
-            
+        </div>   
     </main>
+    <footer class="page-footer pink lighten-4">
+        <div class="footer-copyright pink lighten-4">
+            <div class="copyright-text pink lighten-4 blue-grey-text text-darken-4">
+                © 2020 MaskD
+            </div>
+            <div class="link-container pink lighten-4">
+                <a class="blue-grey-text text-darken-4 right link" href="https://github.com/berrytmt612"><img src="./assets/images/GitHub-Mark-32px.png"> Tyler Berry</a>
+                <a class="blue-grey-text text-darken-4 right link" href="https://github.com/civ187"><img src="./assets/images/GitHub-Mark-32px.png"> Victor Lopez</a>
+                <a class="blue-grey-text text-darken-4 right link" href="https://github.com/shanemcf"><img src="./assets/images/GitHub-Mark-32px.png"> Shane McFadden</a>
+                <a class="blue-grey-text text-darken-4 right link" href="https://github.com/anniavd"><img src="./assets/images/GitHub-Mark-32px.png"> Annia Valdes</a>
+                <a class="blue-grey-text text-darken-4 right link-right" href="https://github.com/joshuaweisbrodtorres"><img src="./assets/images/GitHub-Mark-32px.png"> Joshua Weisbrod-Torres</a>
+            </div>
+        </div>
+      </footer>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="./assets/js/script.js"></script>
