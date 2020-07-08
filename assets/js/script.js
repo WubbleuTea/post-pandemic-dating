@@ -5,11 +5,9 @@ var submitButtonEl = document.getElementById("submit-button");
 var deleteButtonEl = document.getElementById("delete-button");
 var pastCitiesEl = document.getElementById("past-cities")
 var victorEl = document.getElementById("victor");
-var anniaEl = document.getElementById("annia");
 var eventRowEl = document.getElementById("event-row");
 var holidayInfoEl = document.getElementById("holiday-info");
 var tylerEl = document.getElementById("tyler");
-var joshuaEl = document.getElementById("joshua");
 var weatherRowEl = document.getElementById("weather-row")
 var formErrorsEl = document.getElementById("form-errors")
 var currentCityEl = document.getElementById("current-city")
@@ -117,6 +115,71 @@ var getWeather = function(weather){
             return
         }
     })
+    showEvent();
+}
+
+//list of event by city     
+
+function showEvent() {
+    //clear the information
+    eventRowEl.innerHTML = "";
+    //key for the api
+    var apikey = "4rwvR5WRLvh2Sb5c";
+
+    // call for show events card
+    document.getElementById("events").className = "row show";
+
+    //call the API request
+    
+    fetch(`https://api.eventful.com/json/events/search?app_key=${apikey}&location=${inputCity},${inputState}&date=Today`)
+        .then(function (response) {
+            return response.json();
+        })
+        
+        .then(function (data) {
+            console.log(data)
+
+            for (var i = 0; i < 3; i++) {
+
+                //create element for event Info
+                var eventCity = document.createElement("div")
+
+                //create variable for show the event date
+                var dateStarClose;
+
+                //create variable for show  the event address             
+                var eventaddress;
+
+                //conditional for the event don't have date for close event
+                if (data.events.event[i].stop_time === null || data.events.event[i].stop_time === " ") {
+                    dateStarClose = "Start date of the event:" + " " + moment(data.events.event[i].start_time.split(" ")[0]).format("MM/DD/YYYY");
+                }
+                else {
+                    dateStarClose = "Start:" + " " + moment(data.events.event[i].start_time.split(" ")[0]).format("MM/DD/YYYY") + " " +
+                        "End:" + " " + moment(data.events.event[i].stop_time.split(" ")[0]).format("MM/DD/YYYY");
+                }
+
+                //condicional for the event address is emty
+                if (data.events.event[i].venue_address === null || data.events.event[i].venue_address === " ") {
+
+                    eventaddress = "Address: Dear user more specifications on the site 😏";
+                }
+                else {
+                    eventaddress = "Address: " + data.events.event[i].venue_address + ".";
+                }
+
+                eventCity.innerHTML = `<div class='col s12 m4'><div class='card  blue-grey darken-1 z-depth-5'><div class='card-content white-text'>
+                <span class='card-title truncate'>${data.events.event[i].title}</span><p>${dateStarClose}</p>
+                <p class='truncate'>${eventaddress}</p></div><div class='card-action'><a href ='${data.events.event[i].url}' target= _blank > Click here for more information. </a>
+                <div></div></div></div></div>`
+
+                //all info append on page
+                eventRowEl.appendChild(eventCity)
+
+            }
+           
+        })
+
 }
 
 // submit button
