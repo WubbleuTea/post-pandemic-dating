@@ -16,7 +16,8 @@ var drinkHandler = function(event) {
     // event.preventDefault();               
     // var cityName = inputEl.value.trim();
     // console.log(cityName)
-
+    document.getElementById("cocktail").className = "row show";
+     
     fetch("https://www.thecocktaildb.com/api/json/v1/1/random.php").then(function(response) {
         response.json().then(function(data) {
             console.log(data);
