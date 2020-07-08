@@ -1,3 +1,30 @@
 :root {
     height: 100%;
 }
+
+.container {
+    width: auto;
+    padding-left: 2vh;
+    padding-right: 2vh;
+}
+
+h1, h2, h3 {
+    font-family: 'Galada', cursive;
+}
+h2 {
+    padding: 2vh;
+}
+h3 .city-name{
+    color: white;
+}
+button {
+    margin: 1vh;
+}
+.card .card-content{
+    padding: 5px
+}
+
+.card .card-title {
+    font-size: 20px;
+    font-family: 'Galada', cursive;
+}
