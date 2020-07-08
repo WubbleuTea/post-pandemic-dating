@@ -4,7 +4,6 @@ var stateSelectEl = document.getElementById("state-select");
 var submitButtonEl = document.getElementById("submit-button");
 var deleteButtonEl = document.getElementById("delete-button");
 var pastCitiesEl = document.getElementById("past-cities")
-var victorEl = document.getElementById("victor");
 var eventRowEl = document.getElementById("event-row");
 var holidayInfoEl = document.getElementById("holiday-info");
 var tylerEl = document.getElementById("tyler");
@@ -12,12 +11,11 @@ var weatherRowEl = document.getElementById("weather-row")
 var formErrorsEl = document.getElementById("form-errors")
 var currentCityEl = document.getElementById("current-city")
 var mainPageEl = document.getElementById("main-page")
-var drinkPicEl = document.getElementById("drinkImg");
+var drinkImageEl = document.getElementById("drink-image");
 var drinkNameEl = document.getElementById("drinkName");
-var drinkGlassEl = document.getElementById("drinkGlass");
-var drinkInsEl = document.getElementById("drinkIns");
+var drinkGlassEl = document.getElementById("drink-glass");
+var drinkInstructionsEl = document.getElementById("drink-instructions");
 var differentDrinkEl = document.getElementById("drink-button");
-var drinkIngredientEl = document.getElementById("drinkIngredients");
 var inputCity = "";
 var inputState = "";
 var submitArr =[];
@@ -188,68 +186,53 @@ function showEvent() {
         })
 }
 
-var drinkHandler = function(event) {             
-    // var cityName = inputEl.value.trim();
-    // console.log(cityName)
-    document.getElementById("cocktail").className = "row show"
+var drinkHandler = function(event) {
+
+      document.getElementById("cocktail").className = "row show";
+     
     fetch("https://www.thecocktaildb.com/api/json/v1/1/random.php").then(function(response) {
         response.json().then(function(data) {
-            console.log(data);
 
+            var drinkIngredientEl = document.getElementById("drink-ingredients");
+            // clears html so that ghost images do not appear
+            drinkNameEl.innerHTML = "";
+            drinkIngredientEl.innerHTML="";
+            drinkGlassEl.innerHTML = "";
+            drinkImageEl.setAttribute("src","");
+            drinkInstructionsEl.innerHTML = "";
             var drinkType = data.drinks[0].strAlcoholic;
-            console.log(drinkType);
 
             // this checks to make sure the drink is alcoholic
             if (drinkType == "Non alcoholic" || drinkType == "Optional alcohol") {
                 drinkHandler(event);
              };
-            // information form the API is being added to the index.html 
+
+            // information from the API is being added to the index.html 
             var drinkName = data.drinks[0].strDrink;
-            // console.log(drinkName);
-            drinkNameEl.innerHTML = "<h3>" + drinkName + "</h3>";
-            
+            drinkNameEl.innerHTML = drinkName;
             var drinkImg = data.drinks[0].strDrinkThumb;
-            // console.log(drinkImg);
-            drinkPicEl.setAttribute("src",drinkImg);
-            
+            drinkImageEl.setAttribute("src",drinkImg);
             var drinkGlass = data.drinks[0].strGlass;
-            // console.log(drinkGlass);
-            drinkGlassEl.innerHTML = "The "+ drinkName + " is served in a " + drinkGlass+".";
-            
+            drinkGlassEl.innerHTML = "Served in a: " + drinkGlass;
             var drinkInstructions = data.drinks[0].strInstructions;
-            // console.log(drinkInstructions);
-            drinkInsEl.innerHTML = drinkInstructions;
+            drinkInstructionsEl.innerHTML = drinkInstructions;
 
-            var i=1;
-            
             // object bracket notation
+            // While statement is used to read indgredients and end when it hits a null value
+            var i=1;
              while (data.drinks[0]["strIngredient"+i]) {
-                    console.log(data.drinks[0]["strMeasure"+i],data.drinks[0]["strIngredient"+i]);
-                    var drinkItem = data.drinks[0]["strMeasure"+i] + " - " + data.drinks[0]["strIngredient"+i];
-                   console.log("drink Item is" ,drinkItem);
-                //    drinkIngredientEl.createElement("p")
-                //    var drinkItemEl = document.createElement("p");
-                //    var elementId = "id"[i];
-                //    console.log(elementId);
-                   
-                //    drinkItemEl.setAttribute("id",i)
-                //     drinkItemEl.innerHTML = drinkItem;
-                   
-                   // var addDrinkItem = function( id="drinkIngredients", data) {
-                       
-                    //     }
-                        
-                    //     
-                    //     drinkItemEl.innerHTML = drinkItem;
-                        
-                    //     drinkIngredientEl.innerHTML = drinkItem;
-                    
-                    // addDrinkItem("drinkIngredients", drinkItem);
+                    var drinkMeasure = data.drinks[0]["strMeasure"+i];
+                    if (data.drinks[0]["strMeasure"+i] == null ) {
+                        drinkItem = data.drinks[0]["strIngredient"+i];
+                    } else {
+                        drinkItem = data.drinks[0]["strMeasure"+i] + " - " + data.drinks[0]["strIngredient"+i];
+                    }
+                    var drinkItemEl = document.createElement("p");
+                    drinkItemEl.innerHTML = drinkItem;
+                    drinkIngredientEl.appendChild(drinkItemEl);
                     i++;
-                    
-             };
+                };
         })
-
     })
 };
 
@@ -335,9 +318,8 @@ var resetPage = function(){
     document.getElementById("cocktail").className = "row hide"; 
 }
 
-// inputEl.addEventListener("click", drinkHandler);//this initiates the drink
 differentDrinkEl.addEventListener("click", function(){
-    drinkHandler()
+    drinkHandler();
 });
 
 // gets local storage data and creates buttons for those items

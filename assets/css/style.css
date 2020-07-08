@@ -41,7 +41,7 @@ h4 {
 h2 {
     padding: 2vh;
 }
-h3 .city-name{
+h3 .city-name, p{
     color: white;
 }
 button {
@@ -93,8 +93,7 @@ button {
     border-left: .1vh inset grey;
     border-right: .1vh inset grey;
 }
-.imgDisplay{
-    display: block ;
-    margin-left: auto; 
-    margin-right: auto
-  }
+.image-container {
+    margin-left: auto;
+    margin-right: auto;
+}

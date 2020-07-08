@@ -120,16 +120,16 @@
 
      
         <!-- weather -->
-        <div class="row hide" id="weather">
+        <section class="row hide" id="weather">
             <div class="col s12 card-panel pink lighten-4 gradient-right">
                 <h3>Three Day Forecast</h3>
                 <div class="row" id="weather-row"></div>  
             </div>
-        </div>
+        </section>
 
 
         <!--holiday-->
-        <div class="row hide" id="holiday">
+        <section class="row hide" id="holiday">
             <div id="shane" class="col s12 card-panel pink lighten-1 gradient-left">
                 <h3>Holidays</h3>
                 <div class="col s12" id="holiday">
@@ -142,20 +142,20 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
  
         <!-- Events-->
-        <div class="row hide" id="events">
+        <section class="row hide" id="events">
             <div class="col s12 card-panel pink lighten-4 gradient-right">
                 <h3>Events</h3>
                 <div class="row" id="event-row"></div> 
             </div>
-        </div>
+        </section>
   
 
         <!--Resturants/Food-->
-        <div class="row hide" id="food">
+        <section class="row hide" id="food">
             <div id="tyler" class="col s12 card-panel pink lighten-1 gradient-left">
                 <h3>Resturantes/Food</h3>
                 <div class="row" id="food-row">
@@ -174,30 +174,37 @@
                     </div>
                 </div> 
             </div> 
-        </div>
+        </section>
 
-            <!--Cocktail-->
-            <div class="row hide" id="cocktail">
-                <div id="victor" class="col s12 card-panel pink lighten-4 z-depth-5 gradient-right">
-                    <h3>Cocktail</h3>
-                    <div class = "col s12 card blue-grey z-depth-5">
-                        <span id = "drinkName" class = "card-title text-center"></span>
-                        <div class = "card-image imgDisplay" >
-                            <img id = "drinkImg" >
-                            <!-- <span id = "drinkName" class = "card-title white-text"></span> -->
+        <!--Cocktail-->
+        <section class="row hide" id="cocktail">
+            <div class="col s12 card-panel pink lighten-4 z-depth-5 gradient-right center-align">
+                <h3>Cocktail</h3>
+                <div class = "col s12 card blue-grey z-depth-5">
+                    <h3 id = "drinkName" class="white-text"></h3>
+
+                    <div class="row">
+                        <div class="card-content col s12 l4">
+                            <img id="drink-image" class="card-image" style="width:100%; max-width: 250px;">
                         </div>
-                        <div class="card-content">
-                            <p id = "drinkGlass"></p>
-                            <p id = "drinkIns"></p>
-                            <div id = "drinkIngredients"></div>
-                        </div>
-                        <div class="card-action">
-                            <a id="drink-button" class="waves-effect waves-light btn pink lighten-1">Another Drink?</a>
+                        <div class="card-stacked col s12 l8">
+                            <div class="card-content">
+                                <p id="drink-glass"></p>
+                                <br>
+                                <div id="drink-ingredients"></div>
+                                <br>
+                                <p id="drink-instructions"></p>
+                            </div>
+                            <div class="card-action">
+                                <a id="drink-button" class="waves-effect waves-light btn pink lighten-1" style="margin-top: 25px; margin-bottom: 25px;">Another Drink?</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>   
+        </section>
+
+  
     </main>
     <footer class="page-footer pink lighten-4">
         <div class="footer-copyright pink lighten-4">
