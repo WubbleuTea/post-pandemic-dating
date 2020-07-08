@@ -16,12 +16,13 @@ var drinkHandler = function(event) {
     // event.preventDefault();               
     // var cityName = inputEl.value.trim();
     // console.log(cityName)
-    document.getElementById("cocktail").className = "row show";
+    //  document.getElementById("cocktail").className = "row show";
      
     fetch("https://www.thecocktaildb.com/api/json/v1/1/random.php").then(function(response) {
         response.json().then(function(data) {
             console.log(data);
             var drinkIngredientEl = document.getElementById("drinkIngredients");
+            
             drinkIngredientEl.innerHTML="";
             var drinkType = data.drinks[0].strAlcoholic;
             console.log(drinkType);
@@ -81,5 +82,5 @@ var drinkHandler = function(event) {
 
 
 inputEl.addEventListener("click", drinkHandler);//this initiates the drink function
-differentDrinkEl.addEventListener("click", drinkHandler);
+differentDrinkEl.addEventListener("click", drinkHandler);//this initiates the drink function without resetting the page
 
