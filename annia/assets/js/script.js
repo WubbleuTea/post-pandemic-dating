@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-//list of event by city     
+//list of events by city     
 
 function showEvent() {
 

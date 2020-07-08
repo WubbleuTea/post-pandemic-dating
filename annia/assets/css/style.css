@@ -59,3 +59,10 @@ button {
     box-shadow: 0 0 10px rgb(233, 127, 127);
       
 }
+#annia,#joshua{
+    background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1))
+}
+
+#shane{
+    background-image: linear-gradient(to left, rgba(255,0,0,0), rgba(255,0,0,1))
+}
