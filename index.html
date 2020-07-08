@@ -21,7 +21,7 @@
         <form id="city-form" class="row">
 
            <!-- city input -->
-            <input name="city" type="text" id="text-input" placeholder="Type city name here and select state from the dropdown" class="col s12 l3">
+            <input name="city" type="text" id="text-input" placeholder="Type city name here" class="col s12 l3">
              <!-- state input -->
             <div class="col s12 l2 browser-default">
                 <select name="state" id="state-select" class="browser-default">
@@ -180,17 +180,19 @@
             <div class="row hide" id="cocktail">
                 <div id="victor" class="col s12 card-panel pink lighten-4 z-depth-5 gradient-right">
                     <h3>Cocktail</h3>
-                    <div class="col s12">
-                        <div class="card blue-grey darken-1">
-                        <div class="card-content white-text">
-                            <span class="card-title">Card Title</span>
-                            <p>I am a very simple card. I am good at containing small bits of information.
-                            I am convenient because I require little markup to use effectively.</p>
+                    <div class = "col s12 card blue-grey z-depth-5">
+                        <span id = "drinkName" class = "card-title text-center"></span>
+                        <div class = "card-image imgDisplay" >
+                            <img id = "drinkImg" >
+                            <!-- <span id = "drinkName" class = "card-title white-text"></span> -->
+                        </div>
+                        <div class="card-content">
+                            <p id = "drinkGlass"></p>
+                            <p id = "drinkIns"></p>
+                            <div id = "drinkIngredients"></div>
                         </div>
                         <div class="card-action">
-                            <a href="#">This is a link</a>
-                            <a href="#">This is a link</a>
-                        </div>
+                            <a id="drink-button" class="waves-effect waves-light btn pink lighten-1">Another Drink?</a>
                         </div>
                     </div>
                 </div>
