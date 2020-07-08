@@ -1,16 +1,68 @@
 :root {
     height: 100%;
-    margin: 0;
-    padding: 0;
+}
+body.modal-open {
+    height: 100vh;
+    overflow-y: hidden;
+}
+body {
+    padding-left: 2vh;
+    padding-right: 2vh
+}
+header {
+    justify-content: center;
+
+}
+.logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 250px;
+    max-height: 250px;
 }
 
-body {
+.container {
     width: auto;
     padding-left: 2vh;
     padding-right: 2vh;
 }
 
-h1 {
+h1, h2, h3 {
     font-family: 'Galada', cursive;
 }
+h4 {
+    font-size: 3vh;
+}
+h2 {
+    padding: 2vh;
+}
+h3 .city-name{
+    color: white;
+}
+button {
+    margin: 1vh;
+}
+.modal-button {
+    padding:0 auto;
+}
+.modal {
+    overflow-y: hidden;
+}
+.card .card-content{
+    padding: 5px
+}
+.card .card-title {
+    font-size: 20px;
+    font-family: 'Galada', cursive;
+}
+.card:hover {
+    -webkit-transform:scale(1.1);transform:scale(1.1);
+    box-shadow: 0 0 10px rgb(233, 127, 127);     
+}
+.gradient-right{
+    background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1))
+}
 
+.gradient-left{
+    background-image: linear-gradient(to left, rgba(255,0,0,0), rgba(255,0,0,1))
+}
