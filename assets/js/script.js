@@ -4,7 +4,6 @@ var stateSelectEl = document.getElementById("state-select");
 var submitButtonEl = document.getElementById("submit-button");
 var deleteButtonEl = document.getElementById("delete-button");
 var pastCitiesEl = document.getElementById("past-cities")
-var victorEl = document.getElementById("victor");
 var eventRowEl = document.getElementById("event-row");
 var holidayInfoEl = document.getElementById("holiday-info");
 var tylerEl = document.getElementById("tyler");
@@ -12,6 +11,11 @@ var weatherRowEl = document.getElementById("weather-row")
 var formErrorsEl = document.getElementById("form-errors")
 var currentCityEl = document.getElementById("current-city")
 var mainPageEl = document.getElementById("main-page")
+var drinkImageEl = document.getElementById("drink-image");
+var drinkNameEl = document.getElementById("drinkName");
+var drinkGlassEl = document.getElementById("drink-glass");
+var drinkInstructionsEl = document.getElementById("drink-instructions");
+var differentDrinkEl = document.getElementById("drink-button");
 var inputCity = "";
 var inputState = "";
 var submitArr =[];
@@ -116,6 +120,7 @@ var getWeather = function(weather){
         }
     })
     showEvent();
+    drinkHandler();
 }
 
 //list of event by city     
@@ -136,7 +141,7 @@ function showEvent() {
             return response.json();
         })
         
-        .then(function (data) {
+        .then(function(data) {
             console.log(data)
 
             for (var i = 0; i < 3; i++) {
@@ -168,7 +173,7 @@ function showEvent() {
                     eventaddress = "Address: " + data.events.event[i].venue_address + ".";
                 }
 
-                eventCity.innerHTML = `<div class='col s12 m4'><div class='card  blue-grey darken-1 z-depth-5'><div class='card-content white-text'>
+                eventCity.innerHTML = `<div class='col s12 m4'><div class='card blue-grey darken-1 z-depth-5'><div class='card-content white-text'>
                 <span class='card-title truncate'>${data.events.event[i].title}</span><p>${dateStarClose}</p>
                 <p class='truncate'>${eventaddress}</p></div><div class='card-action'><a href ='${data.events.event[i].url}' target= _blank > Click here for more information. </a>
                 <div></div></div></div></div>`
@@ -179,8 +184,57 @@ function showEvent() {
             }
            
         })
-
 }
+
+var drinkHandler = function(event) {
+
+      document.getElementById("cocktail").className = "row show";
+     
+    fetch("https://www.thecocktaildb.com/api/json/v1/1/random.php").then(function(response) {
+        response.json().then(function(data) {
+
+            var drinkIngredientEl = document.getElementById("drink-ingredients");
+            // clears html so that ghost images do not appear
+            drinkNameEl.innerHTML = "";
+            drinkIngredientEl.innerHTML="";
+            drinkGlassEl.innerHTML = "";
+            drinkImageEl.setAttribute("src","");
+            drinkInstructionsEl.innerHTML = "";
+            var drinkType = data.drinks[0].strAlcoholic;
+
+            // this checks to make sure the drink is alcoholic
+            if (drinkType == "Non alcoholic" || drinkType == "Optional alcohol") {
+                drinkHandler(event);
+             };
+
+            // information from the API is being added to the index.html 
+            var drinkName = data.drinks[0].strDrink;
+            drinkNameEl.innerHTML = drinkName;
+            var drinkImg = data.drinks[0].strDrinkThumb;
+            drinkImageEl.setAttribute("src",drinkImg);
+            var drinkGlass = data.drinks[0].strGlass;
+            drinkGlassEl.innerHTML = "Served in a: " + drinkGlass;
+            var drinkInstructions = data.drinks[0].strInstructions;
+            drinkInstructionsEl.innerHTML = drinkInstructions;
+
+            // object bracket notation
+            // While statement is used to read indgredients and end when it hits a null value
+            var i=1;
+             while (data.drinks[0]["strIngredient"+i]) {
+                    var drinkMeasure = data.drinks[0]["strMeasure"+i];
+                    if (data.drinks[0]["strMeasure"+i] == null ) {
+                        drinkItem = data.drinks[0]["strIngredient"+i];
+                    } else {
+                        drinkItem = data.drinks[0]["strMeasure"+i] + " - " + data.drinks[0]["strIngredient"+i];
+                    }
+                    var drinkItemEl = document.createElement("p");
+                    drinkItemEl.innerHTML = drinkItem;
+                    drinkIngredientEl.appendChild(drinkItemEl);
+                    i++;
+                };
+        })
+    })
+};
 
 // submit button
 submitButtonEl.addEventListener("click", function(event){
@@ -263,6 +317,10 @@ var resetPage = function(){
     document.getElementById("food").className = "row hide"; 
     document.getElementById("cocktail").className = "row hide"; 
 }
+
+differentDrinkEl.addEventListener("click", function(){
+    drinkHandler();
+});
 
 // gets local storage data and creates buttons for those items
 var oldSearchHistory = function() {

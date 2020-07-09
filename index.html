@@ -21,7 +21,7 @@
         <form id="city-form" class="row">
 
            <!-- city input -->
-            <input name="city" type="text" id="text-input" placeholder="Type city name here and select state from the dropdown" class="col s12 l3">
+            <input name="city" type="text" id="text-input" placeholder="Type city name here" class="col s12 l3">
              <!-- state input -->
             <div class="col s12 l2 browser-default">
                 <select name="state" id="state-select" class="browser-default">
@@ -120,16 +120,16 @@
 
      
         <!-- weather -->
-        <div class="row hide" id="weather">
+        <section class="row hide" id="weather">
             <div class="col s12 card-panel pink lighten-4 gradient-right">
                 <h3>Three Day Forecast</h3>
                 <div class="row" id="weather-row"></div>  
             </div>
-        </div>
+        </section>
 
 
         <!--holiday-->
-        <div class="row hide" id="holiday">
+        <section class="row hide" id="holiday">
             <div id="shane" class="col s12 card-panel pink lighten-1 gradient-left">
                 <h3>Holidays</h3>
                 <div class="col s12" id="holiday">
@@ -142,20 +142,20 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
  
         <!-- Events-->
-        <div class="row hide" id="events">
+        <section class="row hide" id="events">
             <div class="col s12 card-panel pink lighten-4 gradient-right">
                 <h3>Events</h3>
                 <div class="row" id="event-row"></div> 
             </div>
-        </div>
+        </section>
   
 
         <!--Resturants/Food-->
-        <div class="row hide" id="food">
+        <section class="row hide" id="food">
             <div id="tyler" class="col s12 card-panel pink lighten-1 gradient-left">
                 <h3>Resturantes/Food</h3>
                 <div class="row" id="food-row">
@@ -174,28 +174,37 @@
                     </div>
                 </div> 
             </div> 
-        </div>
+        </section>
 
-            <!--Cocktail-->
-            <div class="row hide" id="cocktail">
-                <div id="victor" class="col s12 card-panel pink lighten-4 z-depth-5 gradient-right">
-                    <h3>Cocktail</h3>
-                    <div class="col s12">
-                        <div class="card blue-grey darken-1">
-                        <div class="card-content white-text">
-                            <span class="card-title">Card Title</span>
-                            <p>I am a very simple card. I am good at containing small bits of information.
-                            I am convenient because I require little markup to use effectively.</p>
+        <!--Cocktail-->
+        <section class="row hide" id="cocktail">
+            <div class="col s12 card-panel pink lighten-4 z-depth-5 gradient-right center-align">
+                <h3>Cocktail</h3>
+                <div class = "col s12 card blue-grey z-depth-5">
+                    <h3 id = "drinkName" class="white-text"></h3>
+
+                    <div class="row">
+                        <div class="card-content col s12 l4">
+                            <img id="drink-image" class="card-image" style="width:100%; max-width: 250px;">
                         </div>
-                        <div class="card-action">
-                            <a href="#">This is a link</a>
-                            <a href="#">This is a link</a>
-                        </div>
+                        <div class="card-stacked col s12 l8">
+                            <div class="card-content">
+                                <p id="drink-glass"></p>
+                                <br>
+                                <div id="drink-ingredients"></div>
+                                <br>
+                                <p id="drink-instructions"></p>
+                            </div>
+                            <div class="card-action">
+                                <a id="drink-button" class="waves-effect waves-light btn pink lighten-1" style="margin-top: 25px; margin-bottom: 25px;">Another Drink?</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>   
+        </section>
+
+  
     </main>
     <footer class="page-footer pink lighten-4">
         <div class="footer-copyright pink lighten-4">
