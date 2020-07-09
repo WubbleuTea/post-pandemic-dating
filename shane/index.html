@@ -3,25 +3,233 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://unpkg.com/@material-ui/core@latest/umd/material-ui.development.js">
+    <link href="https://fonts.googleapis.com/css2?family=Galada&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="./assets/css/style.css">
     <title>Post Pandemic Dating</title>
 </head>
-<body>
-    <main>
-        <h1>Post Pandemic Dating</h1>
-        <form>
-            <input type="text">
-            <input type="submit">
+<body class="blue lighten-5 center-align">
+    <main class="container">
+        <header class="row">
+            <img src="./assets/images/logo.png" class="col s12 l2 circle">
+            <h1 class="col s12 l10 hide-on-small-only">Post Pandemic Dating</h1>
+        </header>
+        <form id="city-form" class="row">
+
+            <input name="city" type="text" id="text-input" placeholder="Type city name here" class="col s12 l3">
+            <div class="col s12 l2 browser-default">
+                <select name="state" id="state-select" class="browser-default">
+                    <option value="" selected="selected">Select a State</option>
+                    <option value="AL">Alabama</option>
+                    <option value="AK">Alaska</option>
+                    <option value="AZ">Arizona</option>
+                    <option value="AR">Arkansas</option>
+                    <option value="CA">California</option>
+                    <option value="CO">Colorado</option>
+                    <option value="CT">Connecticut</option>
+                    <option value="DE">Delaware</option>
+                    <option value="DC">District Of Columbia</option>
+                    <option value="FL">Florida</option>
+                    <option value="GA">Georgia</option>
+                    <option value="HI">Hawaii</option>
+                    <option value="ID">Idaho</option>
+                    <option value="IL">Illinois</option>
+                    <option value="IN">Indiana</option>
+                    <option value="IA">Iowa</option>
+                    <option value="KS">Kansas</option>
+                    <option value="KY">Kentucky</option>
+                    <option value="LA">Louisiana</option>
+                    <option value="ME">Maine</option>
+                    <option value="MD">Maryland</option>
+                    <option value="MA">Massachusetts</option>
+                    <option value="MI">Michigan</option>
+                    <option value="MN">Minnesota</option>
+                    <option value="MS">Mississippi</option>
+                    <option value="MO">Missouri</option>
+                    <option value="MT">Montana</option>
+                    <option value="NE">Nebraska</option>
+                    <option value="NV">Nevada</option>
+                    <option value="NH">New Hampshire</option>
+                    <option value="NJ">New Jersey</option>
+                    <option value="NM">New Mexico</option>
+                    <option value="NY">New York</option>
+                    <option value="NC">North Carolina</option>
+                    <option value="ND">North Dakota</option>
+                    <option value="OH">Ohio</option>
+                    <option value="OK">Oklahoma</option>
+                    <option value="OR">Oregon</option>
+                    <option value="PA">Pennsylvania</option>
+                    <option value="RI">Rhode Island</option>
+                    <option value="SC">South Carolina</option>
+                    <option value="SD">South Dakota</option>
+                    <option value="TN">Tennessee</option>
+                    <option value="TX">Texas</option>
+                    <option value="UT">Utah</option>
+                    <option value="VT">Vermont</option>
+                    <option value="VA">Virginia</option>
+                    <option value="WA">Washington</option>
+                    <option value="WV">West Virginia</option>
+                    <option value="WI">Wisconsin</option>
+                    <option value="WY">Wyoming</option>
+                </select>
+            </div>
+            <button type="submit" id="submit-button" class="col s12 l3 waves-effect waves-light btn pink lighten-1"><i class="small material-icons">search</i>Select your city</button>
+            <button type="submit" id="delete-button" class="col s12 l3 waves-effect waves-light red accent-4 btn"><i class="small material-icons">delete_forever</i>Delete your search history</button>
         </form>
-        <div id="victor"></div>
-        <div id="tyler"></div>
-        <div id="annia"></div>
-        <div id="joshua"></div>
-        <div id="jeremy"></div>
+        <!-- buttons for past cities searched -->
+        <div id="past-cities"></div>
+        <div id="form-errors"></div>
+        <div id="current-city"></div>
+        <div class="divider"></div>
+        
+     
+        <!-- weather -->
+
+        <div class="row hide" id="weather">
+            <div id="joshua" class="col s12 card-panel pink lighten-4">
+                <h3>Three Day Forecast</h3>
+                <div class="row" id="weather-row"></div>  
+            </div>
+        </div>
+        <div class="divider"></div>
+        <div class="row" id="holiday">
+            <div id="shane" class="col s12 card-panel pink lighten-1">
+                <h3>Holidays</h3>
+                <div class="col s12" id="holiday">
+                    <div class="card blue-grey">
+                      <div class="card-content white-text" id="blue-holiday">
+                        <div class="col s8" id= "blue-holiday0"></div>
+                        <div class="col s8" id= "blue-holiday1"></div>
+                        <div class="col s8" id= "blue-holiday2"></div>
+                        
+                      </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+         <!-- event row-->   
+        <!-- Events-->
+        <div class="divider"></div>
+        <div class="row" id="events">
+            <div id="annia" class="col s12 card-panel pink lighten-4 ">
+                <h3>Events</h3>
+                <div class="row" id="event-row">
+                    <div class="col s12 m4">
+                        <div class="card medium blue-grey darken-1 z-depth-5">
+                        <div class="card-content white-text">
+                            <span class="card-title">EVENT TITLE</span>
+                            <p>Description goes here</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="#">Click here for more information</a>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m4">
+                        <div class="card medium blue-grey darken-1 z-depth-5">
+                            <div class="card-content white-text">
+                                <span class="card-title">Card Title</span>
+                                <p>I am a very simple card. I am good at containing small bits of information.
+                                I am convenient because I require little markup to use effectively.</p>
+                            </div>
+                            <div class="card-action">
+                                <a href="#">This is a link</a>
+                                <a href="#">This is a link</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m4">
+                        <div class="card medium blue-grey darken-1 z-depth-5">
+                        <div class="card-content white-text">
+                            <span class="card-title">Card Title</span>
+                            <p>I am a very simple card. I am good at containing small bits of information.
+                            I am convenient because I require little markup to use effectively.</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="#">This is a link</a>
+                            <a href="#">This is a link</a>
+                        </div>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div>
+  
+
+        <div class="divider"></div>
+
+        <div class="row" id="food">
+            <div id="tyler" class="col s12 card-panel pink lighten-1 z-depth-5">
+                <h3>Food</h3>
+                <div class="row" id="food-row">
+                    <div class="col s12 l4">
+                        <div class="card blue-grey darken-1">
+                        <div class="card-content white-text">
+                            <span class="card-title">Card Title</span>
+                            <p>I am a very simple card. I am good at containing small bits of information.
+                            I am convenient because I require little markup to use effectively.</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="#">This is a link</a>
+                            <a href="#">This is a link</a>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col s12 l4">
+                        <div class="card blue-grey darken-1 z-depth-5">
+                        <div class="card-content white-text">
+                            <span class="card-title">Card Title</span>
+                            <p>I am a very simple card. I am good at containing small bits of information.
+                            I am convenient because I require little markup to use effectively.</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="#">This is a link</a>
+                            <a href="#">This is a link</a>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col s12 l4">
+                        <div class="card blue-grey darken-1 z-depth-5">
+                        <div class="card-content white-text">
+                            <span class="card-title">Card Title</span>
+                            <p>I am a very simple card. I am good at containing small bits of information.
+                            I am convenient because I require little markup to use effectively.</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="#">This is a link</a>
+                            <a href="#">This is a link</a>
+                        </div>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+             
+            </div>
+            <div class="row hide" id="cocktail">
+                <div id="victor" class="col s12 card-panel pink lighten-4 z-depth-5">
+                    <h3>Cocktail</h3>
+                    <div class="col s12">
+                        <div class="card blue-grey darken-1">
+                        <div class="card-content white-text">
+                            <span class="card-title">Card Title</span>
+                            <p>I am a very simple card. I am good at containing small bits of information.
+                            I am convenient because I require little markup to use effectively.</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="#">This is a link</a>
+                            <a href="#">This is a link</a>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            
+           
+            
     </main>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>
