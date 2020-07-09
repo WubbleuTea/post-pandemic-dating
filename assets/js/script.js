@@ -101,6 +101,7 @@ var getWeather = function(weather){
             }
             showHoliday();
             showEvent();
+            showRestaurants(inputCity, inputState);
             drinkHandler();
         });  
 
@@ -241,7 +242,7 @@ function showEvent() {
                 else {
                     eventAddress = "Address: " + data.events.event[i].venue_address;
                 }
-                eventCity.innerHTML = `<div class='col s12 m4'><div class='card blue-grey darken-1 z-depth-5'>
+                eventCity.innerHTML = `<div class='col s12 l4'><div class='card blue-grey darken-1 z-depth-5'>
                     <div class='card-content white-text'>
                 <span class='card-title truncate'>${data.events.event[i].title}</span><p>${dateStartEnd}</p>
                 <p class='truncate'>${eventAddress}</p></div><div class='card-action'><a href ='${data.events.event[i].url}' target= _blank > Click here for more information. </a>
@@ -253,6 +254,59 @@ function showEvent() {
             }
            
         })
+}
+
+function showRestaurants(inputCity, inputState) {
+    var user_key = '35903b8c609f2fd648fb40bba04deb15';
+    var city_id;
+    //Show restaurants div
+    $('#food').attr('class', 'row show');
+
+    //Get city ID from Zomato API
+    $.ajax({
+        url: 'https://developers.zomato.com/api/v2.1/cities?q=' + inputCity,
+        headers: { 'user-key': user_key }
+    })
+    .done(function(data) {
+        for (let location of data.location_suggestions) {
+            if (location.state_code == inputState) {
+                city_id = location.id;
+                return;
+            }
+        }
+        console.log(data)
+        city_id = data.location_suggestions[0].id;
+    })
+    .done(function() {
+
+        //Get random restaurant from search results of this city
+        $.ajax({
+            url: 'https://developers.zomato.com/api/v2.1/search?entity_id=' + city_id + '&entity_type=city',
+            headers: { 'user-key': user_key }
+        })
+        .done(function(data) {
+
+            let index1 = Math.floor(Math.random() * data.results_shown);
+            let index2 = Math.floor(Math.random() * data.results_shown);
+            while (index2 == index1) {
+                index2 = Math.floor(Math.random() * data.results_shown);
+            }
+            let index3 = Math.floor(Math.random() * data.results_shown);
+            while (index3 == index1 || index3 == index2) {
+                index3 = Math.floor(Math.random() * data.results_shown);
+            }
+
+            let restaurants = [data.restaurants[index1].restaurant, data.restaurants[index2].restaurant, data.restaurants[index3].restaurant];
+
+            console.log(restaurants[0]);
+
+            for (let i = 0; i < restaurants.length; i++) {
+                $('.restaurant-title').eq(i).text(restaurants[i].name);
+                $('.restaurant-desc').eq(i).html("Cuisines: " + restaurants[i].cuisines + "<br>" + "Rating: " + restaurants[i].user_rating.aggregate_rating + " out of 5");
+                $('.restaurant-link').eq(i).attr('href', restaurants[i].url);
+            }
+        });
+    });
 }
 
 var drinkHandler = function(event) {
