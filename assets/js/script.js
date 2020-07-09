@@ -117,9 +117,84 @@ var getWeather = function(weather){
         };
     });
     //run all other API
+    // showHoliday();
     showEvent();
     drinkHandler();
 };
+//   // sets the function for Holiday API
+// function showHoliday() {
+//     //recieves and formats dates for presentation
+//     var holidayDay = moment().format("DD")
+//     var addingDay = holidayDay;
+//     var holidayMonth = moment().format("MM")
+//     var holidayYear = moment().format("YYYY")
+//     var todayDate = moment().format('MM/DD/YYYY')
+//     var tomorrowDate = moment().add(1,'days').format('MM/DD/YYYY')
+//     var followingDate = moment().add(2,'days').format('MM/DD/YYYY')
+//      // connects dates to HTML and styles them
+//     var blueHoliday0El = document.getElementById("blue-holiday0")
+//         blueHoliday0El.className = "row show";  
+//         blueHoliday0El.innerHTML += "<span class='card-title'>" + todayDate + "</span>";
+//     var blueHoliday1El = document.getElementById("blue-holiday1")
+//         blueHoliday1El.className = "row show";  
+//         blueHoliday1El.innerHTML += "<span class='card-title'>" + tomorrowDate + "</span>";
+//     var blueHoliday2El = document.getElementById("blue-holiday2")
+//         blueHoliday2El.innerHTML += "<span class='card-title'>" + followingDate + "</span>";
+//         blueHoliday2El.className = "row show";   
+//         //creates holidayText variable 
+//     // var holidayText = document.createElement('p')
+      
+//         // Key for the API
+//       var apikey = "47cffd35c3b98761e7a671cc818f58812739481a";    
+    
+//       // calls the Request for API and fetches it
+//     for (let i=0; i<=2; i++) {
+//         fetch(`https://calendarific.com/api/v2/holidays?api_key=${apikey}&country=US&year=${holidayYear}&month=${holidayMonth}&day=${addingDay}`)
+//             .then(function(response) {
+//                 response.json().then(function (holiday) {
+//                 //creates document for the holiday function to be able to append properly
+//                     var holidayText = document.createElement('p')
+//                         holidayText.innerText += ""
+                    
+//                     //runs if statement to display if there is a holiday
+//                     if (holiday.response.holidays.length == 0) {
+//                         holidayText.innerHTML = 'There are no holidays today.';
+//                         //runs else if statement for if there is a single holiday
+//                     } else if ( holiday.response.holidays.length == 1) {
+//                         holidayText.innerText += "The holiday for this day is " + holiday.response.holidays[0].name;
+//                         //runs else if statement for if there is more than one holiday
+//                     } else if (holiday.response.holidays.length > 1) {
+//                         holidayText.innerText += "The holiday for this day is " + holiday.response.holidays[0].name + ' & there are other holidays';            
+//                     // runs an error statement if not working properly
+//                     } else {
+//                         var elem = document.getElementById("modal2");
+//                         document.getElementById("alertText").textContent = "There was an error with the finding holiday information.";
+//                         var instance = M.Modal.getInstance(elem);
+//                         instance.open();
+//                         formEl.reset();
+//                         // add onclick to close and clean the alert text element
+//                         var close = document.querySelector("#closeModal");
+//                         close.addEventListener("click", function () {
+//                             instance.close();
+//                             document.getElementById("alertText").textContent = " ";
+//                         });
+//                     }
+                    
+//                     // runs an if statement that appends the proper data to the proper date div
+//                     if (i ===0) {
+//                         blueHoliday0El.appendChild(holidayText);
+//                     } else if (i ===1){
+//                         blueHoliday1El.appendChild(holidayText);
+//                     } else  {
+//                         blueHoliday2El.appendChild(holidayText);
+//                     }
+//                 });
+            
+//             })
+//             // adds to the day variable so the next fetch can move to the next day.
+//             addingDay++  
+//     }
+// };
 
 //list of event by city     
 
