@@ -77,13 +77,7 @@ a {
     -webkit-transform:scale(1.01);transform:scale(1.01);
     box-shadow: 0 0 20px rgb(100, 8, 8);     
 }
-/*.gradient-right{
-    
-    background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1))
-}
-.gradient-left{
-    background-image: linear-gradient(to left, rgba(255,0,0,0), rgba(255,0,0,1))
-}*/
+
 .copyright-text {
     padding-left: 2vh;
 }
@@ -103,9 +97,9 @@ a {
 .restaurant-link {
     margin-right: 0;
 }
-.image-container {
-    margin-left: auto;
-    margin-right: auto;
+.event-images {
+    width: 100%;
+    max-height: 250px;
 }
 .general{
     background-image: url(../images/pale-pink-heart.jpg);
@@ -115,4 +109,5 @@ a {
 .card-image {
     width: 100%;
 }
+
 

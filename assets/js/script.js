@@ -156,7 +156,7 @@ function showHoliday() {
                 response.json().then(function (holiday) {
                     //creates document for the holiday function to be able to append properly
                     var holidayText = document.createElement('p')
-                    holidayText.classList="black-text";
+                    holidayText.classList = "black-text";
                     holidayText.innerText += ""
 
                     //runs if statement to display if there is a holiday
@@ -183,7 +183,7 @@ function showHoliday() {
                         });
                         return
                     }
-                    
+
 
                     // runs an if statement that appends the proper data to the proper date div
                     if (i === 0) {
@@ -201,6 +201,7 @@ function showHoliday() {
     }
 };
 
+
 //list of event by city     
 
 function showEvent() {
@@ -211,51 +212,74 @@ function showEvent() {
     // shows the big card hat contains all elements for Events
     document.getElementById("events").className = "row show";
     //call the API request
-    var today = moment().format().slice(0,19)
-    var twoDays =moment().add(2, 'days').format().slice(0,19)
+    var today = moment().format().slice(0, 19)
+    var twoDays = moment().add(2, 'days').format().slice(0, 19)
     //https://app.ticketmaster.com/discovery/v2/events.json?size=10&apikey=G0BAiyLNapnnmpiC6motC5S9k6gFkYLl&includeTBA=no&includeTBD=no&includeTest=no&includeFamily=no&localStartEndDateTime=${today},${twoDays}&city=${inputCity}
     fetch(`https://app.ticketmaster.com/discovery/v2/events.json?size=10&apikey=${apikey}&includeTBA=no&includeTBD=no&includeTest=no&includeFamily=no&localStartEndDateTime=${today},${twoDays}&city=${inputCity}`)
         .then(function (response) {
             return response.json();
         })
         .then(function (data) {
-            console.log(data)
-           for (var i = 0; i < 3; i++) {
-                //create element for event Info
+            console.log("events", data)
+
+            console.log(data._embedded.events.length)
+            if (data._embedded.events.length >=3) {
+                for (var i=0; i < 3; i++) {
+                    //create element for event Info
+                    var eventCity = document.createElement("div");
+
+                    eventCity.innerHTML = `<div class='col s12 l4'><div class='card medium N/A transparent z-depth-5'>
+                        <div class='card-content black-text'>
+                        <div class='center-align'><img id='drink-image' class='event-images' src='${data._embedded.events[i].images[0].url}' /></div>
+                        <span class='card-title truncate'>${data._embedded.events[i].name}</span><p class='black-text'>Start date of the event is ${moment(data._embedded.events[i].dates.start.localDate).format("MM/DD/YYYY")}</p>
+                        </div><div class='card-action'><a href ='${data._embedded.events[i]._embedded.attractions[0].url}' target= _blank > Click here for more information </a>
+                        <div></div></div></div></div>`
+
+                    //all info append on page
+                    eventRowEl.appendChild(eventCity)
+
+                }
+
+            }else if (data._embedded.events.length ==2){
+                console.log()
+                for (var i=0; i < 2; i++) {
+                    //create element for event Info
+                    var eventCity = document.createElement("div");
+
+                    eventCity.innerHTML = `<div class='col s12 l6'><div class='card medium N/A transparent z-depth-5'>
+                        <div class='card-content black-text'>
+                        <div class='center-align'><img id='drink-image' class='event-images' src='${data._embedded.events[i].images[0].url}' /></div>
+                        <span class='card-title truncate'>${data._embedded.events[i].name}</span><p class='black-text'>Start date of the event is ${moment(data._embedded.events[i].dates.start.localDate).format("MM/DD/YYYY")}</p>
+                        </div><div class='card-action'><a href ='${data._embedded.events[i]._embedded.attractions[0].url}' target= _blank > Click here for more information </a>
+                        <div></div></div></div></div>`
+
+                    //all info append on page
+                    eventRowEl.appendChild(eventCity)
+
+                } 
+            } else if(data._embedded.events.length==1) {
+
                 var eventCity = document.createElement("div");
-                //create variable to show the event date
-                var dateStartEnd;
-                //create variable to show the event address             
-                var eventAddress;
-                //conditional if the event does not have an end date.
-               /* if (data.events.event[i].stop_time === null || data.events.event[i].stop_time === " ") {
-                    dateStartEnd = "Start date of the event is " + moment(data.events.event[i].start_time.split(" ")[0]).format("MM/DD/YYYY");
-                }
-                else {
-                    dateStartEnd = "Start: " + moment(data.events.event[i].start_time.split(" ")[0]).format("MM/DD/YYYY") + "   " +
-                        "End: " + moment(data.events.event[i].stop_time.split(" ")[0]).format("MM/DD/YYYY");
-                }*/
-                //condtional for the event if address is empty
-               /* if (data.events.event[i].venue_address === null || data.events.event[i].venue_address === " ") {
-                    eventAddress = "Address: Please check out the link below.";
-                }
-                else {
-                    eventAddress = "Address: " + data.events.event[i].venue_address;
-                }*/
-                eventCity.innerHTML = `<div class='col s12 l4'><div class='card N/A transparent z-depth-5'>
+
+                eventCity.innerHTML = `<div class='col s12'><div class='card medium  N/A transparent z-depth-5'>
                     <div class='card-content black-text'>
-                <span class='card-title truncate'>${data._embedded.events[i].name}</span><p class='black-text'>Start date of the event is ${moment(data._embedded.events[i].dates.start.localDate).format("MM/DD/YYYY")}</p>
-                <div class='card-image'><img id='drink-image' class='card-image' src='${data._embedded.events[i].images[0].url}' /></div> </div><div class='card-action'><a href ='${data._embedded.events[i]._embedded.attractions[0].url}' target= _blank > Click here for more information </a>
-                <div></div></div></div></div>`
+                    <div class='center-align'><img id='drink-image' class='event-images' src='${data._embedded.events[i].images[0].url}' /></div>
+                    <span class='card-title truncate'>${data._embedded.events[0].name}</span><p class='black-text'>Start date of the event is ${moment(data._embedded.events[i].dates.start.localDate).format("MM/DD/YYYY")}</p>
+                    </div><div class='card-action'><a href ='${data._embedded.events[0]._embedded.attractions[0].url}' target= _blank > Click here for more information </a>
+                    <div></div></div></div></div>`
 
                 //all info append on page
                 eventRowEl.appendChild(eventCity)
-          
+            } else {
+                eventCity.innerHTML= `<div class='col s12'><div class='card medium  N/A transparent z-depth-5'>
+                    <div class='card-content black-text'>
+                    <div class='center-align'>
+                    <span class='card-title truncate'> Sorry, their are no events to show at this time.</span>
+                    <div></div></div></div>` 
             }
-        
-    
-         })
- }
+
+        })
+}
 
 function showRestaurants(inputCity) {
     var user_key = '35903b8c609f2fd648fb40bba04deb15';
@@ -292,9 +316,9 @@ function showRestaurants(inputCity) {
                     let restaurants = [data.restaurants[index1].restaurant, data.restaurants[index2].restaurant, data.restaurants[index3].restaurant];
 
                     for (let i = 0; i < restaurants.length; i++) {
-                            $('.restaurant-title').eq(i).text(restaurants[i].name);
-                            $('.restaurant-desc').eq(i).html("Cuisines: " + restaurants[i].cuisines + "<br>" + "Rating: " + restaurants[i].user_rating.aggregate_rating + " out of 5" + "<br>" + "Hours: " + restaurants[i].timings +"<br>" + "Address: " + restaurants[i].location.address + "<br>" + "Phone number(s):  " + restaurants[i].phone_numbers);                   
-                            $('.restaurant-link').eq(i).attr('href', restaurants[i].url);
+                        $('.restaurant-title').eq(i).text(restaurants[i].name);
+                        $('.restaurant-desc').eq(i).html("Cuisines: " + restaurants[i].cuisines + "<br>" + "Rating: " + restaurants[i].user_rating.aggregate_rating + " out of 5" + "<br>" + "Hours: " + restaurants[i].timings + "<br>" + "Address: " + restaurants[i].location.address + "<br>" + "Phone number(s):  " + restaurants[i].phone_numbers);
+                        $('.restaurant-link').eq(i).attr('href', restaurants[i].url);
                     }
                 });
         });
@@ -342,7 +366,7 @@ var drinkHandler = function (event) {
                     drinkItem = data.drinks[0]["strMeasure" + i] + " - " + data.drinks[0]["strIngredient" + i];
                 }
                 var drinkItemEl = document.createElement("p");
-                drinkItemEl.classList="black-text"
+                drinkItemEl.classList = "black-text"
                 drinkItemEl.innerHTML = drinkItem;
                 drinkIngredientEl.appendChild(drinkItemEl);
                 i++;
