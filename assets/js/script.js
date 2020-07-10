@@ -286,10 +286,7 @@ function showRestaurants(inputCity) {
 
                     for (let i = 0; i < restaurants.length; i++) {
                             $('.restaurant-title').eq(i).text(restaurants[i].name);
-                            $('.restaurant-desc').eq(i).html("Cuisines: " + restaurants[i].cuisines + "<br>" + "Rating: " + restaurants[i].user_rating.aggregate_rating + " out of 5");
-                            $('.restaurant-hours').eq(i).text("Hours:  " + restaurants[i].timings);
-                            $('.restaurant-address').eq(i).text("Address: " + restaurants[i].location.address);
-                            $('.restaurant-phone').eq(i).text("Phone number:  " + restaurants[i].phone_numbers);
+                            $('.restaurant-desc').eq(i).html("Cuisines: " + restaurants[i].cuisines + "<br>" + "Rating: " + restaurants[i].user_rating.aggregate_rating + " out of 5" + "<br>" + "Hours: " + restaurants[i].timings +"<br>" + "Address: " + restaurants[i].location.address + "<br>" + "Phone number(s):  " + restaurants[i].phone_numbers);                   
                             $('.restaurant-link').eq(i).attr('href', restaurants[i].url);
                     }
                 });
