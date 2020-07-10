@@ -102,3 +102,35 @@ a {
     margin-left: auto;
     margin-right: auto;
 }
+.eventful-badge,
+.eventful-badge * {
+  margin: 0             !important;
+  padding: 0            !important;
+  border: 0             !important;
+  text-align: center    !important;
+  color: black          !important;
+  font-family: Arial    !important;
+  text-decoration: none !important;
+}
+
+.eventful-large {
+  position: relative    !important;
+  width: 140px          !important;
+  font-size: 15px       !important;
+  line-height: 17px     !important;
+  font-weight: bold     !important;
+}
+
+.eventful-medium {
+  position: relative    !important;
+  width: 100px          !important;
+  font-size: 12px       !important;
+  line-height: 13px     !important;
+}                     
+                      
+.eventful-small {     
+  position: relative    !important;
+  width: 100px          !important;
+  font-size: 11px       !important;
+  line-height: 11px     !important;
+}

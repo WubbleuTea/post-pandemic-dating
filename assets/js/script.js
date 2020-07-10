@@ -216,9 +216,6 @@ function showEvent() {
     document.getElementById("events").className = "row show";
     //call the API request
     fetch(`https://api.eventful.com/json/events/search?app_key=${apikey}&location=${inputCity},${inputState}&date=Today`)
-        .then(function (response) {
-            return response.json();
-        })   
         .then(function(data) {
             for (var i = 0; i < 3; i++) {
                 //create element for event Info
@@ -245,7 +242,7 @@ function showEvent() {
                 eventCity.innerHTML = `<div class='col s12 l4'><div class='card blue-grey darken-1 z-depth-5'>
                     <div class='card-content white-text'>
                 <span class='card-title truncate'>${data.events.event[i].title}</span><p>${dateStartEnd}</p>
-                <p class='truncate'>${eventAddress}</p></div><div class='card-action'><a href ='${data.events.event[i].url}' target= _blank > Click here for more information </a>
+                <p class='truncate'>${eventAddress}</p></div><div class='card-action'><a href ='${data.events.event[i].url}' target= _blank> Click here for more information </a>
                 <div></div></div></div></div>`
 
                 //all info append on page
@@ -265,7 +262,7 @@ function showRestaurants(inputCity, inputState) {
     //Get city ID from Zomato API
     $.ajax({
         url: 'https://developers.zomato.com/api/v2.1/cities?q=' + inputCity,
-        headers: { 'user-key': user_key }
+        headers: {'user-key': user_key }
     })
     .done(function(data) {
         for (let location of data.location_suggestions) {
@@ -274,7 +271,6 @@ function showRestaurants(inputCity, inputState) {
                 return;
             }
         }
-        console.log(data)
         city_id = data.location_suggestions[0].id;
     })
     .done(function() {
@@ -285,7 +281,6 @@ function showRestaurants(inputCity, inputState) {
             headers: { 'user-key': user_key }
         })
         .done(function(data) {
-
             let index1 = Math.floor(Math.random() * data.results_shown);
             let index2 = Math.floor(Math.random() * data.results_shown);
             while (index2 == index1) {
@@ -297,8 +292,6 @@ function showRestaurants(inputCity, inputState) {
             }
 
             let restaurants = [data.restaurants[index1].restaurant, data.restaurants[index2].restaurant, data.restaurants[index3].restaurant];
-
-            console.log(restaurants[0]);
 
             for (let i = 0; i < restaurants.length; i++) {
                 $('.restaurant-title').eq(i).text(restaurants[i].name);
