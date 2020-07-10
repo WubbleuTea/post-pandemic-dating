@@ -48,6 +48,10 @@ button {
 }
 a {
     margin-right: 0 !important;
+    color: blue !important;
+}
+.btn {
+    color: white !important;
 }
 .modal-button {
     padding:0 auto;
@@ -107,6 +111,9 @@ a {
     background-image: url(../images/pale-pink-heart.jpg);
     background-repeat: no-repeat;
     background-attachment: fixed;
+}
+.card-image {
+    width: 100%;
 }
 
 
