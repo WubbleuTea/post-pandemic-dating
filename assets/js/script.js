@@ -67,6 +67,7 @@ var getWeather = function (weather) {
                     cityFormEl.reset();
                     return
                 };
+                weatherRowEl.innerHTML = ""
                 currentCityEl.innerHTML = "";
                 var currentCityTitle = document.createElement("div");
                 currentCityTitle.className = "";
@@ -92,6 +93,7 @@ var getWeather = function (weather) {
                         "</div>";
                     weatherRowEl.appendChild(weatherForecast);
                 }
+                //run all other API
                 showHoliday();
                 showEvent();
                 showRestaurants(inputCity);
@@ -114,7 +116,6 @@ var getWeather = function (weather) {
             return
         };
     });
-    //run all other API
 };
 // sets the function for Holiday API
 function showHoliday() {
@@ -210,14 +211,10 @@ function showEvent() {
     // shows the big card hat contains all elements for Events
     document.getElementById("events").className = "row show";
     //call the API request
-<<<<<<< HEAD
-    fetch(`https://api.eventful.com/json/events/search?app_key=${apikey}&location=${inputCity}&date=Today`)
-=======
     var today = moment().format().slice(0,19)
     var twoDays =moment().add(2, 'days').format().slice(0,19)
     //https://app.ticketmaster.com/discovery/v2/events.json?size=10&apikey=G0BAiyLNapnnmpiC6motC5S9k6gFkYLl&includeTBA=no&includeTBD=no&includeTest=no&includeFamily=no&localStartEndDateTime=${today},${twoDays}&city=${inputCity}
     fetch(`https://app.ticketmaster.com/discovery/v2/events.json?size=10&apikey=${apikey}&includeTBA=no&includeTBD=no&includeTest=no&includeFamily=no&localStartEndDateTime=${today},${twoDays}&city=${inputCity}`)
->>>>>>> annia
         .then(function (response) {
             return response.json();
         })
@@ -227,19 +224,11 @@ function showEvent() {
                 //create element for event Info
                 var eventCity = document.createElement("div");
                 //create variable to show the event date
-<<<<<<< HEAD
-                    var dateStartEnd;
-                    //create variable to show the event address             
-                    var eventAddress;
-                    //conditional if the event does not have an end date.
-                if (data.events.event[i].stop_time === null || data.events.event[i].stop_time === " ") {
-=======
                 var dateStartEnd;
                 //create variable to show the event address             
                 var eventAddress;
                 //conditional if the event does not have an end date.
                /* if (data.events.event[i].stop_time === null || data.events.event[i].stop_time === " ") {
->>>>>>> annia
                     dateStartEnd = "Start date of the event is " + moment(data.events.event[i].start_time.split(" ")[0]).format("MM/DD/YYYY");
                 }
                 else {
@@ -252,35 +241,21 @@ function showEvent() {
                 }
                 else {
                     eventAddress = "Address: " + data.events.event[i].venue_address;
-<<<<<<< HEAD
-                }
-                eventCity.innerHTML = `<div class='col s12 l4'><div class='card blue-grey darken-1 z-depth-5'>
-                    <div class='card-content white-text'>
-                <span class='card-title truncate'>${data.events.event[i].title}</span><p>${dateStartEnd}</p>
-                <p class='truncate'>${eventAddress}</p></div><div class='card-action'><a href ='${data.events.event[i].url}' target=_blank> Click here for more information </a>
-=======
                 }*/
                 eventCity.innerHTML = `<div class='col s12 l4'><div class='card N/A transparent z-depth-5'>
                     <div class='card-content black-text'>
                 <span class='card-title truncate'>${data._embedded.events[i].name}</span><p class='black-text'>Start date of the event is ${moment(data._embedded.events[i].dates.start.localDate).format("MM/DD/YYYY")}</p>
                 <div class='card-image'><img id='drink-image' class='card-image' src='${data._embedded.events[i].images[0].url}' /></div> </div><div class='card-action'><a href ='${data._embedded.events[i]._embedded.attractions[0].url}' target= _blank > Click here for more information </a>
->>>>>>> annia
                 <div></div></div></div></div>`
 
                 //all info append on page
                 eventRowEl.appendChild(eventCity)
-<<<<<<< HEAD
-            }
-        })
-}
-=======
           
             }
         
     
          })
  }
->>>>>>> annia
 
 function showRestaurants(inputCity) {
     var user_key = '35903b8c609f2fd648fb40bba04deb15';
@@ -304,7 +279,6 @@ function showRestaurants(inputCity) {
                 headers: { 'user-key': user_key }
             })
                 .done(function (data) {
-                    console.log(data)
                     let index1 = Math.floor(Math.random() * data.results_shown);
                     let index2 = Math.floor(Math.random() * data.results_shown);
                     while (index2 == index1) {
@@ -415,7 +389,6 @@ deleteButtonEl.addEventListener("click", function () {
     submitArr = [];
     localStorage.setItem("searched", "[]");
     inputCity = "";
-    // inputState = "";
     pastCitiesEl.innerHTML = "";
     cityFormEl.reset();
     resetPage();
