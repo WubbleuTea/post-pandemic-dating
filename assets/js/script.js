@@ -1,6 +1,5 @@
 var cityFormEl = document.getElementById("city-form")
 var textInputEl = document.getElementById("text-input");
-var stateSelectEl = document.getElementById("state-select");
 var submitButtonEl = document.getElementById("submit-button");
 var deleteButtonEl = document.getElementById("delete-button");
 var pastCitiesEl = document.getElementById("past-cities")
@@ -15,46 +14,41 @@ var drinkGlassEl = document.getElementById("drink-glass");
 var drinkInstructionsEl = document.getElementById("drink-instructions");
 var differentDrinkEl = document.getElementById("drink-button");
 var inputCity = "";
-var inputState = "";
 var submitArr = [];
 var checkStorage = JSON.parse(localStorage.getItem("searched"))
 
-// create button for city,state
+// create button for city
 var createCity = function () {
-    var buttonName = inputCity + "," + inputState
     var cityButton = document.createElement("button");
     cityButton.className = "btn blue-grey";
-    cityButton.textContent = buttonName;
+    cityButton.textContent = inputCity;
     pastCitiesEl.appendChild(cityButton);
     weatherRowEl.innerHTML = "";
 
-    //add listener to run city and state on click
+    //add listener to run city on click
     cityButton.addEventListener("click", function (event) {
         event.preventDefault();
         weatherRowEl.innerHTML = "";
-        placeArr = event.target.textContent.split(",");
-        inputCity = placeArr[0];
-        inputState = placeArr[1];
+        inputCity = cityButton.textContent;
         getWeather(false);
     })
 }
 
 // get weather for city
 var getWeather = function (weather) {
-    fetch("https://api.weatherapi.com/v1/forecast.json?key=898f900d29334755948192951200207&days=3&hour=19&q=" + inputCity + "," + inputState).then(function (response) {
+    fetch("https://api.weatherapi.com/v1/forecast.json?key=898f900d29334755948192951200207&days=3&hour=19&q=" + inputCity).then(function (response) {
         if (response.ok) {
-            var cityState = inputCity + "," + inputState;
 
             response.json().then(function (data) {
                 // if it is a new item push into arrays and local storage and create button
-                if (weather == true && !submitArr.includes(cityState) && data.location.country == "United States of America") {
-                    submitArr.push(cityState);
+                if (weather == true && !submitArr.includes(inputCity) && data.location.country == "United States of America") {
+                    submitArr.push(inputCity);
                     localStorage.setItem("searched", JSON.stringify(submitArr));
                     createCity();
                 };
                 //if button is already made this will run following
 
-                //if the city and state combination is not useable
+                //if the city is not useable
                 if (data.location.country != "United States of America") {
                     // Error for city not in the United States of America
                     var elem = document.getElementById("modal2");
@@ -70,14 +64,13 @@ var getWeather = function (weather) {
                         document.getElementById("alertText").textContent = " ";
                     });
                     inputCity = "";
-                    inputState = "";
                     cityFormEl.reset();
                     return
                 };
                 currentCityEl.innerHTML = "";
                 var currentCityTitle = document.createElement("div");
                 currentCityTitle.className = "";
-                currentCityTitle.innerHTML = "<h2 class='col s12 card-panel card N/A transparent center-align city-name'>" + inputCity + "," + inputState; + "</h2>";
+                currentCityTitle.innerHTML = "<h2 class='col s12 card-panel card N/A transparent center-align city-name'>" + inputCity + "</h2>";
                 currentCityEl.appendChild(currentCityTitle);
                 document.getElementById("weather").className = "row show";
 
@@ -101,7 +94,7 @@ var getWeather = function (weather) {
                 }
                 showHoliday();
                 showEvent();
-                showRestaurants(inputCity, inputState);
+                showRestaurants(inputCity);
                 drinkHandler();
             });
 
@@ -162,7 +155,7 @@ function showHoliday() {
                 response.json().then(function (holiday) {
                     //creates document for the holiday function to be able to append properly
                     var holidayText = document.createElement('p')
-                    holidayText.classList="black-text";
+                    holidayText.classList = "black-text";
                     holidayText.innerText += ""
 
                     //runs if statement to display if there is a holiday
@@ -189,7 +182,7 @@ function showHoliday() {
                         });
                         return
                     }
-                    
+
 
                     // runs an if statement that appends the proper data to the proper date div
                     if (i === 0) {
@@ -207,6 +200,7 @@ function showHoliday() {
     }
 };
 
+
 //list of event by city     
 
 function showEvent() {
@@ -217,53 +211,76 @@ function showEvent() {
     // shows the big card hat contains all elements for Events
     document.getElementById("events").className = "row show";
     //call the API request
-    var today = moment().format().slice(0,19)
-    var twoDays =moment().add(2, 'days').format().slice(0,19)
+    var today = moment().format().slice(0, 19)
+    var twoDays = moment().add(2, 'days').format().slice(0, 19)
     //https://app.ticketmaster.com/discovery/v2/events.json?size=10&apikey=G0BAiyLNapnnmpiC6motC5S9k6gFkYLl&includeTBA=no&includeTBD=no&includeTest=no&includeFamily=no&localStartEndDateTime=${today},${twoDays}&city=${inputCity}
     fetch(`https://app.ticketmaster.com/discovery/v2/events.json?size=10&apikey=${apikey}&includeTBA=no&includeTBD=no&includeTest=no&includeFamily=no&localStartEndDateTime=${today},${twoDays}&city=${inputCity}`)
         .then(function (response) {
             return response.json();
         })
         .then(function (data) {
-            console.log(data)
-           for (var i = 0; i < 3; i++) {
-                //create element for event Info
+            console.log("events", data)
+
+            console.log(data._embedded.events.length)
+            if (data._embedded.events.length >=3) {
+                for (var i=0; i < 3; i++) {
+                    //create element for event Info
+                    var eventCity = document.createElement("div");
+
+                    eventCity.innerHTML = `<div class='col s12 l4'><div class='card medium N/A transparent z-depth-5'>
+                        <div class='card-content black-text'>
+                        <div class='center-align'><img id='drink-image' class='event-images' src='${data._embedded.events[i].images[0].url}' /></div>
+                        <span class='card-title truncate'>${data._embedded.events[i].name}</span><p class='black-text'>Start date of the event is ${moment(data._embedded.events[i].dates.start.localDate).format("MM/DD/YYYY")}</p>
+                        </div><div class='card-action'><a href ='${data._embedded.events[i]._embedded.attractions[0].url}' target= _blank > Click here for more information </a>
+                        <div></div></div></div></div>`
+
+                    //all info append on page
+                    eventRowEl.appendChild(eventCity)
+
+                }
+
+            }else if (data._embedded.events.length ==2){
+                console.log()
+                for (var i=0; i < 2; i++) {
+                    //create element for event Info
+                    var eventCity = document.createElement("div");
+
+                    eventCity.innerHTML = `<div class='col s12 l6'><div class='card medium N/A transparent z-depth-5'>
+                        <div class='card-content black-text'>
+                        <div class='center-align'><img id='drink-image' class='event-images' src='${data._embedded.events[i].images[0].url}' /></div>
+                        <span class='card-title truncate'>${data._embedded.events[i].name}</span><p class='black-text'>Start date of the event is ${moment(data._embedded.events[i].dates.start.localDate).format("MM/DD/YYYY")}</p>
+                        </div><div class='card-action'><a href ='${data._embedded.events[i]._embedded.attractions[0].url}' target= _blank > Click here for more information </a>
+                        <div></div></div></div></div>`
+
+                    //all info append on page
+                    eventRowEl.appendChild(eventCity)
+
+                } 
+            } else if(data._embedded.events.length==1) {
+
                 var eventCity = document.createElement("div");
-                //create variable to show the event date
-                var dateStartEnd;
-                //create variable to show the event address             
-                var eventAddress;
-                //conditional if the event does not have an end date.
-               /* if (data.events.event[i].stop_time === null || data.events.event[i].stop_time === " ") {
-                    dateStartEnd = "Start date of the event is " + moment(data.events.event[i].start_time.split(" ")[0]).format("MM/DD/YYYY");
-                }
-                else {
-                    dateStartEnd = "Start: " + moment(data.events.event[i].start_time.split(" ")[0]).format("MM/DD/YYYY") + "   " +
-                        "End: " + moment(data.events.event[i].stop_time.split(" ")[0]).format("MM/DD/YYYY");
-                }*/
-                //condtional for the event if address is empty
-               /* if (data.events.event[i].venue_address === null || data.events.event[i].venue_address === " ") {
-                    eventAddress = "Address: Please check out the link below.";
-                }
-                else {
-                    eventAddress = "Address: " + data.events.event[i].venue_address;
-                }*/
-                eventCity.innerHTML = `<div class='col s12 l4'><div class='card N/A transparent z-depth-5'>
+
+                eventCity.innerHTML = `<div class='col s12'><div class='card medium  N/A transparent z-depth-5'>
                     <div class='card-content black-text'>
-                <span class='card-title truncate'>${data._embedded.events[i].name}</span><p class='black-text'>Start date of the event is ${moment(data._embedded.events[i].dates.start.localDate).format("MM/DD/YYYY")}</p>
-                <div class='card-image'><img id='drink-image' class='card-image' src='${data._embedded.events[i].images[0].url}' /></div> </div><div class='card-action'><a href ='${data._embedded.events[i]._embedded.attractions[0].url}' target= _blank > Click here for more information </a>
-                <div></div></div></div></div>`
+                    <div class='center-align'><img id='drink-image' class='event-images' src='${data._embedded.events[i].images[0].url}' /></div>
+                    <span class='card-title truncate'>${data._embedded.events[0].name}</span><p class='black-text'>Start date of the event is ${moment(data._embedded.events[i].dates.start.localDate).format("MM/DD/YYYY")}</p>
+                    </div><div class='card-action'><a href ='${data._embedded.events[0]._embedded.attractions[0].url}' target= _blank > Click here for more information </a>
+                    <div></div></div></div></div>`
 
                 //all info append on page
                 eventRowEl.appendChild(eventCity)
-          
+            } else {
+                eventCity.innerHTML= `<div class='col s12'><div class='card medium  N/A transparent z-depth-5'>
+                    <div class='card-content black-text'>
+                    <div class='center-align'>
+                    <span class='card-title truncate'> Sorry, their are no events to show at this time.</span>
+                    <div></div></div></div>` 
             }
-        
-    
-         })
- }
 
-function showRestaurants(inputCity, inputState) {
+        })
+}
+
+function showRestaurants(inputCity) {
     var user_key = '35903b8c609f2fd648fb40bba04deb15';
     var city_id;
     //Show restaurants div
@@ -275,13 +292,6 @@ function showRestaurants(inputCity, inputState) {
         headers: { 'user-key': user_key }
     })
         .done(function (data) {
-            for (let location of data.location_suggestions) {
-                if (location.state_code == inputState) {
-                    city_id = location.id;
-                    return;
-                }
-            }
-            console.log(data)
             city_id = data.location_suggestions[0].id;
         })
         .done(function () {
@@ -292,7 +302,6 @@ function showRestaurants(inputCity, inputState) {
                 headers: { 'user-key': user_key }
             })
                 .done(function (data) {
-
                     let index1 = Math.floor(Math.random() * data.results_shown);
                     let index2 = Math.floor(Math.random() * data.results_shown);
                     while (index2 == index1) {
@@ -305,11 +314,9 @@ function showRestaurants(inputCity, inputState) {
 
                     let restaurants = [data.restaurants[index1].restaurant, data.restaurants[index2].restaurant, data.restaurants[index3].restaurant];
 
-                    console.log(restaurants[0]);
-
                     for (let i = 0; i < restaurants.length; i++) {
                         $('.restaurant-title').eq(i).text(restaurants[i].name);
-                        $('.restaurant-desc').eq(i).html("Cuisines: " + restaurants[i].cuisines + "<br>" + "Rating: " + restaurants[i].user_rating.aggregate_rating + " out of 5");
+                        $('.restaurant-desc').eq(i).html("Cuisines: " + restaurants[i].cuisines + "<br>" + "Rating: " + restaurants[i].user_rating.aggregate_rating + " out of 5" + "<br>" + "Hours: " + restaurants[i].timings + "<br>" + "Address: " + restaurants[i].location.address + "<br>" + "Phone number(s):  " + restaurants[i].phone_numbers);
                         $('.restaurant-link').eq(i).attr('href', restaurants[i].url);
                     }
                 });
@@ -358,7 +365,7 @@ var drinkHandler = function (event) {
                     drinkItem = data.drinks[0]["strMeasure" + i] + " - " + data.drinks[0]["strIngredient" + i];
                 }
                 var drinkItemEl = document.createElement("p");
-                drinkItemEl.classList="black-text"
+                drinkItemEl.classList = "black-text"
                 drinkItemEl.innerHTML = drinkItem;
                 drinkIngredientEl.appendChild(drinkItemEl);
                 i++;
@@ -370,39 +377,11 @@ var drinkHandler = function (event) {
 // submit button
 submitButtonEl.addEventListener("click", function (event) {
     event.preventDefault();
-    // checks to see if any content field is empty
-    if (stateSelectEl.value == 0 && textInputEl.value == "") {
-        // Error message for no city or state
-        var elem = document.getElementById("modal2")
-        document.getElementById("alertText").textContent = "Please add a city and state"
-        var instance = M.Modal.getInstance(elem);
-        instance.open()
-        cityFormEl.reset();
-        // add onclick to close and clean the alert text element
-        var close = document.querySelector("#closeModal")
-        close.addEventListener("click", function () {
-            instance.close();
-            document.getElementById("alertText").textContent = " ";
-        });
-        return
-    } else if (textInputEl.value == "") {
-        // Eror message for no city entered
+    // checks to see if content field is empty
+    if (textInputEl.value == "") {
+        // Error message for no city
         var elem = document.getElementById("modal2")
         document.getElementById("alertText").textContent = "Please add a city"
-        var instance = M.Modal.getInstance(elem);
-        instance.open()
-        cityFormEl.reset();
-        // add onclick to close and clean the alert text element
-        var close = document.querySelector("#closeModal")
-        close.addEventListener("click", function () {
-            instance.close();
-            document.getElementById("alertText").textContent = " ";
-        });
-        return
-    } else if (stateSelectEl.value == 0) {
-        // Error message for no state entered
-        var elem = document.getElementById("modal2")
-        document.getElementById("alertText").textContent = "Please add a state"
         var instance = M.Modal.getInstance(elem);
         instance.open()
         cityFormEl.reset();
@@ -416,7 +395,6 @@ submitButtonEl.addEventListener("click", function (event) {
     };
     // if both inputs have items then run this
     inputCity = document.querySelector("input[name='city']").value.trim().replace(/(^\w|\s\w)/g, m => m.toUpperCase());
-    inputState = stateSelectEl.value;
     cityFormEl.reset();
     getWeather(true);
 
@@ -434,7 +412,7 @@ deleteButtonEl.addEventListener("click", function () {
     submitArr = [];
     localStorage.setItem("searched", "[]");
     inputCity = "";
-    inputState = "";
+    // inputState = "";
     pastCitiesEl.innerHTML = "";
     cityFormEl.reset();
     resetPage();
@@ -462,8 +440,8 @@ var oldSearchHistory = function () {
         localStorage.clear();
         for (var i = 0; i < checkStorage.length; i++) {
             submitArr.push(checkStorage[i]);
-            inputCity = checkStorage[i].split(",")[0];
-            inputState = checkStorage[i].split(",")[1];
+            inputCity = checkStorage[i];
+            // inputState = checkStorage[i].split(",")[1];
             createCity();
         }
         localStorage.setItem("searched", JSON.stringify(submitArr));
