@@ -105,7 +105,11 @@ a {
 }
 .general{
     background-image: url(../images/pale-pink-heart.jpg);
-    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
-
+a {
+    margin-right: 0 !important;
+    color: blue !important;
+}
 
