@@ -10,7 +10,7 @@
     <title>MaskD</title>
 </head>
 <div style="background-image: url('./assets/images/photo-1559251606-c623743a6d76.PNG');"></div>
-<body class="blue lighten-5 center-align">
+<body class="blue lighten-5 center-align  general">
     <section class="container">
         <header class="row">
             <img src="./assets/images/logo.png" class="col s12 l2 circle logo">
@@ -120,7 +120,7 @@
      
         <!-- weather -->
         <section class="row hide" id="weather">
-            <div class="col s12 card-panel pink lighten-4 gradient-right">
+            <div class="col s12 card-panel N/A transparent">
                 <h3>Three Day Forecast</h3>
                 <div class="row" id="weather-row"></div>  
             </div>
@@ -129,11 +129,11 @@
 
         <!--holiday-->
         <section class="row hide" id="holiday">
-            <div class="col s12 card-panel pink lighten-1 gradient-left">
+            <div class="col s12 card-panel  N/A transparent">
                 <h3>Holidays</h3>
                 <div class="col s12" id="holiday">
-                    <div class="card blue-grey">
-                        <div class="card-content white-text" id="blue-holiday">
+                    <div class="card N/A transparent">
+                        <div class="card-content black-text" id="blue-holiday">
                             <div id="blue-holiday0"></div>
                             <div id="blue-holiday1"></div>
                             <div id="blue-holiday2"></div>
@@ -146,7 +146,7 @@
  
         <!-- Events-->
         <section class="row hide" id="events">
-            <div class="col s12 card-panel pink lighten-4 gradient-right">
+            <div class="col s12 card-panel N/A transparent ">
                 <h3>Events</h3>
                 <div class="row" id="event-row"></div> 
             </div>
@@ -155,14 +155,14 @@
 
         <!--Resturants/Food-->
         <section class="row hide" id="food">
-            <div id="tyler" class="col s12 card-panel pink lighten-1 gradient-left">
+            <div id="tyler" class="col s12 card-panel N/A transparent">
                 <h3>Restaurants/Food</h3>
                 <div class="row" id="food-row">
                     <div class="col s12 l4">
-                        <div class="card blue-grey z-depth-5">
-                            <div class="card-content white-text">
+                        <div class="card  N/A transparent z-depth-5">
+                            <div class="card-content black-text">
                                 <span class="card-title restaurant-title truncate"></span>
-                                <p class="restaurant-desc"></p>
+                                <p class="restaurant-desc black-text truncate black-text "></p>
                             </div>
                             <div class="card-action">
                                 <a class="restaurant-link" href="#" target= _blank>Click here for more information</a>
@@ -170,10 +170,10 @@
                         </div>
                     </div>
                     <div class="col s12 l4">
-                        <div class="card blue-grey z-depth-5">
-                            <div class="card-content white-text">
+                        <div class="card N/A transparent z-depth-5">
+                            <div class="card-content black-text">
                                 <span  class="card-title restaurant-title truncate"></span>
-                                <p class="restaurant-desc"></p>
+                                <p class="restaurant-desc truncate black-text"></p>
                             </div>
                             <div class="card-action">
                                 <a class="restaurant-link center-align" href="#" target= _blank>Click here for more information</a>
@@ -181,10 +181,10 @@
                         </div>
                     </div>
                     <div class="col s12 l4">
-                        <div class="card blue-grey z-depth-5">
+                        <div class="card N/A transparent z-depth-5">
                             <div class="card-content white-text">
-                                <span class="card-title restaurant-title truncate"></span>
-                                <p class="restaurant-desc"></p>
+                                <span class="card-title restaurant-title truncate black-text"></span>
+                                <p class="restaurant-desc truncate black-text"></p>
                             </div>
                             <div class="card-action">
                                 <a class="restaurant-link" href="#" target= _blank>Click here for more information</a>
@@ -197,10 +197,10 @@
 
         <!--Cocktail-->
         <section class="row hide" id="cocktail">
-            <div class="col s12 card-panel pink lighten-4 z-depth-5 gradient-right center-align">
+            <div class="col s12 card-panel  N/A transparent  z-depth-5  center-align">
                 <h3>Cocktail</h3>
-                <div class = "col s12 card blue-grey z-depth-5">
-                    <h3 id = "drinkName" class="white-text"></h3>
+                <div class = "col s12 card  N/A transparent  z-depth-5">
+                    <h3 id = "drinkName" class="black-text"></h3>
 
                     <div class="row">
                         <div class="card-content col s12 l4">
@@ -208,11 +208,11 @@
                         </div>
                         <div class="card-stacked col s12 l8">
                             <div class="card-content">
-                                <p id="drink-glass"></p>
+                                <p id="drink-glass" class="black-text"></p>
                                 <br>
-                                <div id="drink-ingredients"></div>
+                                <div id="drink-ingredients" class="black-text"></div>
                                 <br>
-                                <p id="drink-instructions"></p>
+                                <p id="drink-instructions" class="black-text"></p>
                             </div>
                             <div class="card-action">
                                 <a id="drink-button" class="waves-effect waves-light btn pink lighten-1" style="margin-top: 25px; margin-bottom: 25px;">Another Drink?</a>
@@ -226,11 +226,6 @@
   
     </main>
     <footer class="page-footer pink lighten-4">
-        <div class="eventful-badge eventful-small">
-            <img src="http://api.eventful.com/images/powered/eventful_58x20.gif"
-              alt="Local Events, Concerts, Tickets">
-            <p><a href="http://eventful.com/">Events</a> by Eventful</p>
-          </div>
         <div class="footer-copyright pink lighten-4">
             <div class="copyright-text pink lighten-4 blue-grey-text text-darken-4">
                 © 2020 MaskD
