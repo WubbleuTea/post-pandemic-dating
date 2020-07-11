@@ -17,6 +17,11 @@ var inputCity = "";
 var submitArr = [];
 var checkStorage = JSON.parse(localStorage.getItem("searched"))
 
+var getEventUrl = function(url){
+    var urlArr = url.split("%3A%2F%2F")
+     return urlArr[1].replace(/%2F/g, "/")
+ }
+
 // create button for city
 var createCity = function () {
     var cityButton = document.createElement("button");
@@ -184,7 +189,6 @@ function showHoliday() {
                         return
                     }
 
-
                     // runs an if statement that appends the proper data to the proper date div
                     if (i === 0) {
                         blueHoliday0El.appendChild(holidayText);
@@ -200,7 +204,6 @@ function showHoliday() {
         addingDay++
     }
 };
-
 
 //list of event by city     
 
@@ -219,30 +222,49 @@ function showEvent() {
         .then(function (response) {
             return response.json();
         })
-        .then(function (data) {
-            console.log("events", data)
 
+        
+        .then(function (data) {
+            console.log("events for", inputCity, data)
+            
             console.log(data._embedded.events.length)
+         
             if (data._embedded.events.length >=3) {
+                console.log("processing 3 or more")
                 for (var i=0; i < 3; i++) {
+                    // var eventUrl = "https://www.ticketmaster.com/"
+                    //     if (data._embedded.events[i]._embedded.attractions[0].url) {
+                    //         eventUrl = data._embedded.events[i]._embedded.attractions[0].url
+                    //     }
+                    console.log("creating events for " + inputCity)
+                    var postingUrl = getEventUrl(data._embedded.events[i].url);
                     //create element for event Info
                     var eventCity = document.createElement("div");
+                    console.log(getEventUrl("https://ticketmaster.evyy.net/c/av/264167/4272?u=https%3A%2F%2Fconcerts.livenation.com%2Fsaved-by-the-90s-dallas-texas-07-11-2020%2Fevent%2F0C005847CC937695"))
 
                     eventCity.innerHTML = `<div class='col s12 l4'><div class='card medium N/A transparent z-depth-5'>
                         <div class='card-content black-text'>
                         <div class='center-align'><img id='drink-image' class='event-images' src='${data._embedded.events[i].images[0].url}' /></div>
                         <span class='card-title truncate'>${data._embedded.events[i].name}</span><p class='black-text'>Start date of the event is ${moment(data._embedded.events[i].dates.start.localDate).format("MM/DD/YYYY")}</p>
-                        </div><div class='card-action'><a href ='${data._embedded.events[i]._embedded.attractions[0].url}' target= _blank > Click here for more information </a>
+                        </div><div class='card-action'><a href ='https://${postingUrl}' target= _blank > Click here for more information </a>
                         <div></div></div></div></div>`
 
                     //all info append on page
+                    console.log("eventCity: ")
+                    console.log(eventCity)
                     eventRowEl.appendChild(eventCity)
 
                 }
 
-            }else if (data._embedded.events.length ==2){
-                console.log()
+            } else if (data._embedded.events.length ==2){
+                console.log("processing 2")
                 for (var i=0; i < 2; i++) {
+                    // var eventUrl = ""
+                        // if (data._embedded.events[i]._embedded.attractions[0].url == undefined) {
+                        //     eventUrl = "https://www.ticketmaster.com/"
+                        // } else { 
+                        //     eventUrl = data._embedded.events[i]._embedded.attractions[0].url
+                        // }
                     //create element for event Info
                     var eventCity = document.createElement("div");
 
@@ -250,25 +272,33 @@ function showEvent() {
                         <div class='card-content black-text'>
                         <div class='center-align'><img id='drink-image' class='event-images' src='${data._embedded.events[i].images[0].url}' /></div>
                         <span class='card-title truncate'>${data._embedded.events[i].name}</span><p class='black-text'>Start date of the event is ${moment(data._embedded.events[i].dates.start.localDate).format("MM/DD/YYYY")}</p>
-                        </div><div class='card-action'><a href ='${data._embedded.events[i]._embedded.attractions[0].url}' target= _blank > Click here for more information </a>
+                        </div><div class='card-action'><a href ='https://www.ticketmaster.com/' target= _blank > Click here for more information </a>
                         <div></div></div></div></div>`
 
                     //all info append on page
+                    
                     eventRowEl.appendChild(eventCity)
 
                 } 
             } else if(data._embedded.events.length==1) {
-
+                console.log("processing 1")
+                // var eventUrl = ""
+                //     if (data._embedded.events[i]._embedded.attractions[0].url == undefined) {
+                //         eventUrl = "https://www.ticketmaster.com/"
+                //     } else { 
+                //         eventUrl = data._embedded.events[i]._embedded.attractions[0].url
+                //     }
                 var eventCity = document.createElement("div");
 
                 eventCity.innerHTML = `<div class='col s12'><div class='card medium  N/A transparent z-depth-5'>
                     <div class='card-content black-text'>
-                    <div class='center-align'><img id='drink-image' class='event-images' src='${data._embedded.events[i].images[0].url}' /></div>
+                    <div class='center-align'><img id='drink-image' class='event-images' src='${data._embedded.events[0].images[0].url}' /></div>
                     <span class='card-title truncate'>${data._embedded.events[0].name}</span><p class='black-text'>Start date of the event is ${moment(data._embedded.events[i].dates.start.localDate).format("MM/DD/YYYY")}</p>
-                    </div><div class='card-action'><a href ='${data._embedded.events[0]._embedded.attractions[0].url}' target= _blank > Click here for more information </a>
+                    </div><div class='card-action'><a href ='' target= _blank > Click here for more information </a>
                     <div></div></div></div></div>`
 
                 //all info append on page
+                console.log("ready to append")
                 eventRowEl.appendChild(eventCity)
             } else {
                 eventCity.innerHTML= `<div class='col s12'><div class='card medium  N/A transparent z-depth-5'>
@@ -406,7 +436,6 @@ document.addEventListener('DOMContentLoaded', function () {
     var elems = document.querySelectorAll('.modal');
     M.Modal.init(elems, {});
 });
-
 
 //deletes buttons created and local storage
 deleteButtonEl.addEventListener("click", function () {
