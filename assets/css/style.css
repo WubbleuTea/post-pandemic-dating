@@ -102,8 +102,9 @@ a {
 }
 .background{
     background-image: url(../images/pale-pink-heart.jpg);
+    background-position: center;
     background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-size: cover; 
 }
 .card-image {
     width: 100%;
