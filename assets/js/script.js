@@ -217,8 +217,16 @@ function showEvent() {
         })
         //checks how many events show and appends the number of events with no more than 3
         .then(function (data) {  
+            console.log(data)
             //if three or more append 3       
-            if (data._embedded.events.length >=3) {
+            if(data.page.totalElements ==0) {
+                var eventCity = document.createElement("div");
+                eventCity.innerHTML= `<div class='col s12'><div class='card N/A transparent z-depth-5'>
+                    <div class='card-content black-text'>
+                    <div class='center-align'>
+                    <span class='card-title truncate'> Sorry, their are no events to show at this time.</span>
+                    <div></div></div></div>` 
+            } else if (data._embedded.events.length >=3) {
                 for (var i=0; i < 3; i++) {
                     var postingUrl = getEventUrl(data._embedded.events[i].url);
                     //create element for event Info
@@ -238,6 +246,7 @@ function showEvent() {
                 // if 2 append 2 events
             } else if (data._embedded.events.length ==2){
                 for (var i=0; i < 2; i++) {
+                    var postingUrl = getEventUrl(data._embedded.events[i].url);
                     //create element for event Info
                     var eventCity = document.createElement("div");
 
@@ -253,8 +262,10 @@ function showEvent() {
                 } 
                 //if 1 append 1
             } else if(data._embedded.events.length==1) {
-                var eventCity = document.createElement("div");
+                var postingUrl = getEventUrl(data._embedded.events[0].url);
 
+                var eventCity = document.createElement("div");
+                
                 eventCity.innerHTML = `<div class='col s12'><div class='card medium  N/A transparent z-depth-5'>
                     <div class='card-content black-text'>
                     <div class='center-align'><img id='drink-image' class='event-images' src='${data._embedded.events[0].images[0].url}' /></div>
@@ -262,12 +273,6 @@ function showEvent() {
                     </div><div class='card-action'><a href ='https://${postingUrl}' target= _blank > Click here for more information </a>
                     <div></div></div></div></div>`
                 //if no info append this
-            } else {
-                eventCity.innerHTML= `<div class='col s12'><div class='card medium  N/A transparent z-depth-5'>
-                    <div class='card-content black-text'>
-                    <div class='center-align'>
-                    <span class='card-title truncate'> Sorry, their are no events to show at this time.</span>
-                    <div></div></div></div>` 
             }
             //all info append on page
             eventRowEl.appendChild(eventCity)
