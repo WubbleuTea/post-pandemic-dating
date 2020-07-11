@@ -48,6 +48,10 @@ button {
 }
 a {
     margin-right: 0 !important;
+    color: blue !important;
+}
+.btn {
+    color: white !important;
 }
 .modal-button {
     padding:0 auto;
@@ -71,13 +75,7 @@ a {
 }
 .card:hover {
     -webkit-transform:scale(1.01);transform:scale(1.01);
-    box-shadow: 0 0 10px rgb(233, 127, 127);     
-}
-.gradient-right{
-    background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1))
-}
-.gradient-left{
-    background-image: linear-gradient(to left, rgba(255,0,0,0), rgba(255,0,0,1))
+    box-shadow: 0 0 20px rgb(100, 8, 8); 
 }
 .copyright-text {
     padding-left: 2vh;
@@ -98,7 +96,17 @@ a {
 .restaurant-link {
     margin-right: 0;
 }
-.image-container {
-    margin-left: auto;
-    margin-right: auto;
+.event-images {
+    width: 100%;
+    max-height: 250px;
 }
+.background{
+    background-image: url(../images/pale-pink-heart.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+.card-image {
+    width: 100%;
+}
+
+
