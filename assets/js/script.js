@@ -104,7 +104,7 @@ var showWeather = function (weather) {
                 showDrink();
             });
 
-        // if recieved a error for any other reason besides user input.   
+        // if recieved a error for any other reason besides user input. 
         } else {
             var elem = document.getElementById("modal2");
             document.getElementById("alertText").textContent = "There was an error. Please try again.";
@@ -200,7 +200,7 @@ function showHoliday() {
     };
 };
 
-//list of event by city     
+//list of event by city 
 function showEvent() {
     //clear the information currently in the card
     eventRowEl.innerHTML = "";
@@ -216,9 +216,8 @@ function showEvent() {
             return response.json();
         })
         //checks how many events show and appends the number of events with no more than 3
-        .then(function (data) {  
-            console.log(data)
-            //if three or more append 3       
+        .then(function (data) {
+            //if three or more append 3 
             if(data.page.totalElements ==0) {
                 var eventCity = document.createElement("div");
                 eventCity.innerHTML= `<div class='col s12'><div class='card N/A transparent z-depth-5'>
@@ -266,10 +265,10 @@ function showEvent() {
 
                 var eventCity = document.createElement("div");
                 
-                eventCity.innerHTML = `<div class='col s12'><div class='card medium  N/A transparent z-depth-5'>
+                eventCity.innerHTML = `<div class='col s12'><div class='card medium N/A transparent z-depth-5'>
                     <div class='card-content black-text'>
                     <div class='center-align'><img id='drink-image' class='event-images' src='${data._embedded.events[0].images[0].url}' /></div>
-                    <span class='card-title truncate'>${data._embedded.events[0].name}</span><p class='black-text'>Start date of the event is ${moment(data._embedded.events[i].dates.start.localDate).format("MM/DD/YYYY")}</p>
+                    <span class='card-title truncate'>${data._embedded.events[0].name}</span><p class='black-text'>Start date of the event is ${moment(data._embedded.events[0].dates.start.localDate).format("MM/DD/YYYY")}</p>
                     </div><div class='card-action'><a href ='https://${postingUrl}' target= _blank > Click here for more information </a>
                     <div></div></div></div></div>`
                 //if no info append this
