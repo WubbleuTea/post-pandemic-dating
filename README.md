@@ -72,14 +72,20 @@ A random cocktail is shown to the user, if it is not to their liking or if they 
    ### APIS
     -WeatherAPI
     https://www.weatherapi.com/ 
-     -Zamato API
-    https://developers.zomato.com/api
-     -CocktailDB API
-    https://www.thecocktaildb.com/api.php 
-     -Eventsful API
-    https://api.eventful.com/
+
     -Calendarific API
     https://calendarific.com/
+
+    -Ticketmaster API
+    https://developer.ticketmaster.com/
+
+    -Zamato API
+    https://developers.zomato.com/api
+    
+    -CocktailDB API
+    https://www.thecocktaildb.com/api.php 
+
+    
      
 
 
