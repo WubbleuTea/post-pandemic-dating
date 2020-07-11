@@ -1,13 +1,12 @@
-var cityFormEl = document.getElementById("city-form")
+var cityFormEl = document.getElementById("city-form");
 var textInputEl = document.getElementById("text-input");
 var submitButtonEl = document.getElementById("submit-button");
 var deleteButtonEl = document.getElementById("delete-button");
-var pastCitiesEl = document.getElementById("past-cities")
+var pastCitiesEl = document.getElementById("past-cities");
 var eventRowEl = document.getElementById("event-row");
 var holidayInfoEl = document.getElementById("holiday-info");
-var tylerEl = document.getElementById("tyler");
-var weatherRowEl = document.getElementById("weather-row")
-var currentCityEl = document.getElementById("current-city")
+var weatherRowEl = document.getElementById("weather-row");
+var currentCityEl = document.getElementById("current-city");
 var drinkImageEl = document.getElementById("drink-image");
 var drinkNameEl = document.getElementById("drinkName");
 var drinkGlassEl = document.getElementById("drink-glass");
@@ -15,12 +14,12 @@ var drinkInstructionsEl = document.getElementById("drink-instructions");
 var differentDrinkEl = document.getElementById("drink-button");
 var inputCity = "";
 var submitArr = [];
-var checkStorage = JSON.parse(localStorage.getItem("searched"))
+var checkStorage = JSON.parse(localStorage.getItem("searched"));
 
 var getEventUrl = function(url){
-    var urlArr = url.split("%3A%2F%2F")
-     return urlArr[1].replace(/%2F/g, "/")
- }
+    var urlArr = url.split("%3A%2F%2F");
+    return urlArr[1].replace(/%2F/g, "/");
+};
 
 // create button for city
 var createCity = function () {
@@ -35,12 +34,12 @@ var createCity = function () {
         event.preventDefault();
         weatherRowEl.innerHTML = "";
         inputCity = cityButton.textContent;
-        getWeather(false);
-    })
+        showWeather(false);
+    });
 }
 
 // get weather for city
-var getWeather = function (weather) {
+var showWeather = function (weather) {
     fetch("https://api.weatherapi.com/v1/forecast.json?key=898f900d29334755948192951200207&days=3&hour=19&q=" + inputCity).then(function (response) {
         if (response.ok) {
 
@@ -102,10 +101,10 @@ var getWeather = function (weather) {
                 showHoliday();
                 showEvent();
                 showRestaurants(inputCity);
-                drinkHandler();
+                showDrink();
             });
 
-            // if recieved a error for any other reason besides user input.   
+        // if recieved a error for any other reason besides user input.   
         } else {
             var elem = document.getElementById("modal2");
             document.getElementById("alertText").textContent = "There was an error. Please try again.";
@@ -122,6 +121,7 @@ var getWeather = function (weather) {
         };
     });
 };
+
 // sets the function for Holiday API
 function showHoliday() {
     document.getElementById("holiday").className = "row show";
@@ -136,23 +136,20 @@ function showHoliday() {
     var followingDate = moment().add(2, 'days').format('MM/DD/YYYY')
     // connects dates to HTML and styles them
     var blueHoliday0El = document.getElementById("blue-holiday0")
-    blueHoliday0El.innerHTML = ""
-    blueHoliday0El.className = "row show";
-    blueHoliday0El.innerHTML += "<span class='card-title'>" + todayDate + "</span>";
+        blueHoliday0El.innerHTML = ""
+        blueHoliday0El.className = "row show";
+        blueHoliday0El.innerHTML += "<span class='card-title'>" + todayDate + "</span>";
     var blueHoliday1El = document.getElementById("blue-holiday1")
-    blueHoliday1El.innerHTML = ""
-    blueHoliday1El.className = "row show";
-    blueHoliday1El.innerHTML += "<span class='card-title'>" + tomorrowDate + "</span>";
+        blueHoliday1El.innerHTML = ""
+        blueHoliday1El.className = "row show";
+        blueHoliday1El.innerHTML += "<span class='card-title'>" + tomorrowDate + "</span>";
     var blueHoliday2El = document.getElementById("blue-holiday2")
-    blueHoliday2El.innerHTML = ""
-    blueHoliday2El.innerHTML += "<span class='card-title'>" + followingDate + "</span>";
-    blueHoliday2El.className = "row show";
-
-    //creates holidayText variable 
-    // var holidayText = document.createElement('p')
+        blueHoliday2El.innerHTML = ""
+        blueHoliday2El.innerHTML += "<span class='card-title'>" + followingDate + "</span>";
+        blueHoliday2El.className = "row show";
 
     // Key for the API
-    var apikey = "47cffd35c3b98761e7a671cc818f58812739481a";
+    var apikey = "dc9dc3b1778a496e98c0659b365b8818e9204d5e";
 
     // calls the Request for API and fetches it
     for (let i = 0; i <= 2; i++) {
@@ -162,17 +159,17 @@ function showHoliday() {
                     //creates document for the holiday function to be able to append properly
                     var holidayText = document.createElement('p')
                     holidayText.classList = "black-text";
-                    holidayText.innerText += ""
+                    holidayText.innerText = ""
 
                     //runs if statement to display if there is a holiday
                     if (holiday.response.holidays.length == 0) {
                         holidayText.innerHTML = 'There are no holidays today.';
                         //runs else if statement for if there is a single holiday
                     } else if (holiday.response.holidays.length == 1) {
-                        holidayText.innerText += "The holiday for this day is " + holiday.response.holidays[0].name + ".";
+                        holidayText.innerText = "The holiday for this day is " + holiday.response.holidays[0].name + ".";
                         //runs else if statement for if there is more than one holiday
                     } else if (holiday.response.holidays.length > 1) {
-                        holidayText.innerText += "The holiday for this day is " + holiday.response.holidays[0].name + ' & there are other holidays.';
+                        holidayText.innerText = "The holiday for this day is " + holiday.response.holidays[0].name + ' & there are other holidays.';
                         // runs an error statement if not working properly
                     } else {
                         var elem = document.getElementById("modal2");
@@ -187,8 +184,7 @@ function showHoliday() {
                             document.getElementById("alertText").textContent = " ";
                         });
                         return
-                    }
-
+                    };
                     // runs an if statement that appends the proper data to the proper date div
                     if (i === 0) {
                         blueHoliday0El.appendChild(holidayText);
@@ -196,17 +192,15 @@ function showHoliday() {
                         blueHoliday1El.appendChild(holidayText);
                     } else {
                         blueHoliday2El.appendChild(holidayText);
-                    }
+                    };
                 });
-
-            })
+            });
         // adds to the day variable so the next fetch can move to the next day.
-        addingDay++
-    }
+        addingDay++;
+    };
 };
 
 //list of event by city     
-
 function showEvent() {
     //clear the information currently in the card
     eventRowEl.innerHTML = "";
@@ -217,30 +211,18 @@ function showEvent() {
     //call the API request
     var today = moment().format().slice(0, 19)
     var twoDays = moment().add(2, 'days').format().slice(0, 19)
-    //https://app.ticketmaster.com/discovery/v2/events.json?size=10&apikey=G0BAiyLNapnnmpiC6motC5S9k6gFkYLl&includeTBA=no&includeTBD=no&includeTest=no&includeFamily=no&localStartEndDateTime=${today},${twoDays}&city=${inputCity}
     fetch(`https://app.ticketmaster.com/discovery/v2/events.json?size=10&apikey=${apikey}&includeTBA=no&includeTBD=no&includeTest=no&includeFamily=no&localStartEndDateTime=${today},${twoDays}&city=${inputCity}`)
         .then(function (response) {
             return response.json();
         })
-
-        
-        .then(function (data) {
-            console.log("events for", inputCity, data)
-            
-            console.log(data._embedded.events.length)
-         
+        //checks how many events show and appends the number of events with no more than 3
+        .then(function (data) {  
+            //if three or more append 3       
             if (data._embedded.events.length >=3) {
-                console.log("processing 3 or more")
                 for (var i=0; i < 3; i++) {
-                    // var eventUrl = "https://www.ticketmaster.com/"
-                    //     if (data._embedded.events[i]._embedded.attractions[0].url) {
-                    //         eventUrl = data._embedded.events[i]._embedded.attractions[0].url
-                    //     }
-                    console.log("creating events for " + inputCity)
                     var postingUrl = getEventUrl(data._embedded.events[i].url);
                     //create element for event Info
                     var eventCity = document.createElement("div");
-                    console.log(getEventUrl("https://ticketmaster.evyy.net/c/av/264167/4272?u=https%3A%2F%2Fconcerts.livenation.com%2Fsaved-by-the-90s-dallas-texas-07-11-2020%2Fevent%2F0C005847CC937695"))
 
                     eventCity.innerHTML = `<div class='col s12 l4'><div class='card medium N/A transparent z-depth-5'>
                         <div class='card-content black-text'>
@@ -250,21 +232,12 @@ function showEvent() {
                         <div></div></div></div></div>`
 
                     //all info append on page
-                    console.log("eventCity: ")
-                    console.log(eventCity)
                     eventRowEl.appendChild(eventCity)
 
                 }
-
+                // if 2 append 2 events
             } else if (data._embedded.events.length ==2){
-                console.log("processing 2")
                 for (var i=0; i < 2; i++) {
-                    // var eventUrl = ""
-                        // if (data._embedded.events[i]._embedded.attractions[0].url == undefined) {
-                        //     eventUrl = "https://www.ticketmaster.com/"
-                        // } else { 
-                        //     eventUrl = data._embedded.events[i]._embedded.attractions[0].url
-                        // }
                     //create element for event Info
                     var eventCity = document.createElement("div");
 
@@ -272,34 +245,23 @@ function showEvent() {
                         <div class='card-content black-text'>
                         <div class='center-align'><img id='drink-image' class='event-images' src='${data._embedded.events[i].images[0].url}' /></div>
                         <span class='card-title truncate'>${data._embedded.events[i].name}</span><p class='black-text'>Start date of the event is ${moment(data._embedded.events[i].dates.start.localDate).format("MM/DD/YYYY")}</p>
-                        </div><div class='card-action'><a href ='https://www.ticketmaster.com/' target= _blank > Click here for more information </a>
+                        </div><div class='card-action'><a href ='https://${postingUrl}' target= _blank > Click here for more information </a>
                         <div></div></div></div></div>`
 
                     //all info append on page
-                    
                     eventRowEl.appendChild(eventCity)
-
                 } 
+                //if 1 append 1
             } else if(data._embedded.events.length==1) {
-                console.log("processing 1")
-                // var eventUrl = ""
-                //     if (data._embedded.events[i]._embedded.attractions[0].url == undefined) {
-                //         eventUrl = "https://www.ticketmaster.com/"
-                //     } else { 
-                //         eventUrl = data._embedded.events[i]._embedded.attractions[0].url
-                //     }
                 var eventCity = document.createElement("div");
 
                 eventCity.innerHTML = `<div class='col s12'><div class='card medium  N/A transparent z-depth-5'>
                     <div class='card-content black-text'>
                     <div class='center-align'><img id='drink-image' class='event-images' src='${data._embedded.events[0].images[0].url}' /></div>
                     <span class='card-title truncate'>${data._embedded.events[0].name}</span><p class='black-text'>Start date of the event is ${moment(data._embedded.events[i].dates.start.localDate).format("MM/DD/YYYY")}</p>
-                    </div><div class='card-action'><a href ='' target= _blank > Click here for more information </a>
+                    </div><div class='card-action'><a href ='https://${postingUrl}' target= _blank > Click here for more information </a>
                     <div></div></div></div></div>`
-
-                //all info append on page
-                console.log("ready to append")
-                eventRowEl.appendChild(eventCity)
+                //if no info append this
             } else {
                 eventCity.innerHTML= `<div class='col s12'><div class='card medium  N/A transparent z-depth-5'>
                     <div class='card-content black-text'>
@@ -307,10 +269,11 @@ function showEvent() {
                     <span class='card-title truncate'> Sorry, their are no events to show at this time.</span>
                     <div></div></div></div>` 
             }
-
+            //all info append on page
+            eventRowEl.appendChild(eventCity)
         })
 }
-
+//restaurant function
 function showRestaurants(inputCity) {
     var user_key = '35903b8c609f2fd648fb40bba04deb15';
     var city_id;
@@ -352,9 +315,9 @@ function showRestaurants(inputCity) {
                     }
                 });
         });
-}
+};
 
-var drinkHandler = function (event) {
+var showDrink = function (event) {
     //show card for cocktails
     document.getElementById("cocktail").className = "row show";
 
@@ -372,7 +335,7 @@ var drinkHandler = function (event) {
 
             // this checks to make sure the drink is alcoholic and reruns the API to try again.
             if (drinkType == "Non alcoholic" || drinkType == "Optional alcohol") {
-                drinkHandler(event);
+                showDrink(event);
             };
 
             // information from the API is being added to the index.html 
@@ -427,7 +390,7 @@ submitButtonEl.addEventListener("click", function (event) {
     // if both inputs have items then run this
     inputCity = document.querySelector("input[name='city']").value.trim().replace(/(^\w|\s\w)/g, m => m.toUpperCase());
     cityFormEl.reset();
-    getWeather(true);
+    showWeather(true);
 
 })
 
@@ -458,7 +421,7 @@ var resetPage = function () {
 }
 
 differentDrinkEl.addEventListener("click", function () {
-    drinkHandler();
+    showDrink();
 });
 
 // gets localStorage data and creates buttons for those items

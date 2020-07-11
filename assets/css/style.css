@@ -75,9 +75,8 @@ a {
 }
 .card:hover {
     -webkit-transform:scale(1.01);transform:scale(1.01);
-    box-shadow: 0 0 20px rgb(100, 8, 8);     
+    box-shadow: 0 0 20px rgb(100, 8, 8); 
 }
-
 .copyright-text {
     padding-left: 2vh;
 }
@@ -101,7 +100,7 @@ a {
     width: 100%;
     max-height: 250px;
 }
-.general{
+.background{
     background-image: url(../images/pale-pink-heart.jpg);
     background-repeat: no-repeat;
     background-attachment: fixed;
