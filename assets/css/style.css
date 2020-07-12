@@ -1,6 +1,8 @@
 :root {
     height: 100%;
 }
+
+/* body styling */
 body.modal-open {
     height: 100vh;
     overflow-y: hidden;
@@ -10,14 +12,25 @@ body {
     min-height: 100vh;
     flex-direction: column;
 }
+.background{
+    background-image: url(../images/pale-pink-heart.jpg);
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* main/header/footer */
 main {
     flex: 1 0 auto;
     padding-left: 2vh;
     padding-right: 2vh;
 }
 header {
-    justify-content: center;
-
+    padding-top: 1vh;
+}
+footer {
+    width: auto;
 }
 .logo {
     display: block;
@@ -26,12 +39,16 @@ header {
     max-width: 250px;
     max-height: 250px;
 }
+
+/* container in body */
 .container {
     width: 100%;
     padding-left: 2vh;
     padding-right: 2vh;
     text-align: center;
 }
+
+/* text styling */
 h1, h2, h3 {
     font-family: 'Galada', cursive;
 }
@@ -44,15 +61,28 @@ h2 {
 h3 .city-name, p{
     color: white;
 }
+a {
+    margin-right: 0 !important;
+    color: blue !important;
+}
+
+/* button styling */
 button {
     margin: 1vh;
 }
+.btn {
+    color: white !important;
+}
+
+/* modal styling */
 .modal-button {
     padding:0 auto;
 }
 .modal {
     overflow-y: hidden;
 }
+
+/* card styling */
 .card, .card-action:last-child {
     border-radius: 1vh;
 }
@@ -69,14 +99,25 @@ button {
 }
 .card:hover {
     -webkit-transform:scale(1.01);transform:scale(1.01);
-    box-shadow: 0 0 10px rgb(233, 127, 127);     
+    box-shadow: 0 0 20px rgb(100, 8, 8); 
 }
-.gradient-right{
-    background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1))
+
+/* event specific styling */
+.event-images {
+    width: 100%;
+    max-width: 300px;
+    max-height: 250px;
 }
-.gradient-left{
-    background-image: linear-gradient(to left, rgba(255,0,0,0), rgba(255,0,0,1))
+.card-image {
+    width: 100%;
 }
+
+/* food specific styling */
+.restaurant-link {
+    margin-right: 0;
+}
+
+/* footer styling */
 .copyright-text {
     padding-left: 2vh;
 }
@@ -92,8 +133,4 @@ button {
     padding: 0 1vh;
     border-left: .1vh inset grey;
     border-right: .1vh inset grey;
-}
-.image-container {
-    margin-left: auto;
-    margin-right: auto;
 }
