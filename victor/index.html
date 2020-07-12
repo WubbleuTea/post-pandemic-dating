@@ -9,223 +9,175 @@
     <link rel="stylesheet" href="./assets/css/style.css">
     <title>MaskD</title>
 </head>
-<div style="background-image: url('./assets/images/photo-1559251606-c623743a6d76.PNG');"></div>
-    <body class="blue lighten-5 center-align">
-        <section class="container">
-            <header class="row">
-                <img src="./assets/images/logo.png" class="col s12 l2 circle logo">
-                <h1 class="col s12 l10 hide-on-small-only">Post Pandemic Dating</h1>
-            </header>
-            <!--user input-->
-            <form id="city-form" class="row">
-                <!-- city input -->
-                <input name="city" type="text" id="text-input" placeholder="Type city name here and select state from the dropdown" class="col s12 l3">
-                <!-- state input -->
-                <div class="col s12 l2 browser-default">
-                    <select name="state" id="state-select" class="browser-default">
-                        <option value="" selected="selected">State</option>
-                        <option value="AL">Alabama</option>
-                        <option value="AK">Alaska</option>
-                        <option value="AZ">Arizona</option>
-                        <option value="AR">Arkansas</option>
-                        <option value="CA">California</option>
-                        <option value="CO">Colorado</option>
-                        <option value="CT">Connecticut</option>
-                        <option value="DE">Delaware</option>
-                        <option value="DC">District Of Columbia</option>
-                        <option value="FL">Florida</option>
-                        <option value="GA">Georgia</option>
-                        <option value="HI">Hawaii</option>
-                        <option value="ID">Idaho</option>
-                        <option value="IL">Illinois</option>
-                        <option value="IN">Indiana</option>
-                        <option value="IA">Iowa</option>
-                        <option value="KS">Kansas</option>
-                        <option value="KY">Kentucky</option>
-                        <option value="LA">Louisiana</option>
-                        <option value="ME">Maine</option>
-                        <option value="MD">Maryland</option>
-                        <option value="MA">Massachusetts</option>
-                        <option value="MI">Michigan</option>
-                        <option value="MN">Minnesota</option>
-                        <option value="MS">Mississippi</option>
-                        <option value="MO">Missouri</option>
-                        <option value="MT">Montana</option>
-                        <option value="NE">Nebraska</option>
-                        <option value="NV">Nevada</option>
-                        <option value="NH">New Hampshire</option>
-                        <option value="NJ">New Jersey</option>
-                        <option value="NM">New Mexico</option>
-                        <option value="NY">New York</option>
-                        <option value="NC">North Carolina</option>
-                        <option value="ND">North Dakota</option>
-                        <option value="OH">Ohio</option>
-                        <option value="OK">Oklahoma</option>
-                        <option value="OR">Oregon</option>
-                        <option value="PA">Pennsylvania</option>
-                        <option value="RI">Rhode Island</option>
-                        <option value="SC">South Carolina</option>
-                        <option value="SD">South Dakota</option>
-                        <option value="TN">Tennessee</option>
-                        <option value="TX">Texas</option>
-                        <option value="UT">Utah</option>
-                        <option value="VT">Vermont</option>
-                        <option value="VA">Virginia</option>
-                        <option value="WA">Washington</option>
-                        <option value="WV">West Virginia</option>
-                        <option value="WI">Wisconsin</option>
-                        <option value="WY">Wyoming</option>
-                    </select>
-                </div>
-                <!-- submit button -->
-                <button type="submit" id="submit-button" class="col s12 l3 waves-effect waves-light btn pink lighten-4 blue-grey-text text-darken-4 "><i class="small material-icons">search</i>Select your city</button>
-                <!-- delete button -->
-                <button data-target="modal1" type="submit" class="col s12 l3 waves-effect waves-light red accent-4 btn modal-trigger"><i class="small material-icons">delete_forever</i>Delete your search history</button>
-            </form>
-            <!--error modals-->
-            <div id="modal2" class="modal">
+<body class="blue lighten-5 center-align background">
+    <section class="container">
+        <header class="row">
+            <img src="./assets/images/logo.png" class="col s12 l2 circle logo">
+            <h1 class="col s12 l10 hide-on-small-only">Post Pandemic Dating</h1>
+        </header>
+
+        <!--user input-->
+        <form id="city-form" class="row">
+           <!-- city input -->
+            <input name="city" type="text" id="text-input" placeholder="Type in the name of a major city in the USA" class="col s12 l9">
+            <!-- submit button -->
+            <button type="submit" id="submit-button" class="col s12 l1 waves-effect waves-light btn pink lighten-4 blue-grey-text text-darken-4 "><i class="small material-icons">search</i></button>
+            <!-- delete button -->
+            <button data-target="modal1" type="submit" class="col s12 l1 waves-effect waves-light red accent-4 btn modal-trigger"><i class="small material-icons">delete_forever</i></button>
+        </form>
+        <!--error modals-->
+        <div id="modal2" class="modal">
+            <div class="modal-content blue lighten-5">
+              <h4 id="alertText"></h4>
+            </div>
+            <div class="modal-footer blue lighten-5">
+              <a id="closeModal" href="#!" class="modal-close waves-effect waves-green blue-grey btn col s12 modal-button">Close</a>
+            </div>
+          </div>
+            <!-- delete modal -->
+            <div id="modal1" class="modal">
                 <div class="modal-content blue lighten-5">
-                    <h4 id="alertText"></h4>
+                    <h4 class="">Are you sure you want to permanently delete your searches?</h4>
                 </div>
                 <div class="modal-footer blue lighten-5">
-                    <a id="closeModal" href="#!" class="modal-close waves-effect waves-green blue-grey btn col s12 modal-button">Close</a>
-                </div>
-            </div>
-                <!-- delete modal -->
-                <div id="modal1" class="modal">
-                    <div class="modal-content blue lighten-5">
-                        <h4 class="">Are you sure you want to permanently delete your searches?</h4>
+                    <div class="row">
+                        <a href="#!" class="modal-close waves-effect waves-green red btn col s12 modal-button" id="delete-button">Yes, please delete</a>
                     </div>
-                    <div class="modal-footer blue lighten-5">
-                        <div class="row">
-                            <a href="#!" class="modal-close waves-effect waves-green red btn col s12 modal-button" id="delete-button">Yes, please delete</a>
-                        </div>
-                        <div class="row">
-                            <a href="#!" class="modal-close waves-effect waves-green blue btn col s12 modal-button">No, keep my history</a>
-                        </div>
+                    <div class="row">
+                        <a href="#!" class="modal-close waves-effect waves-green blue btn col s12 modal-button">No, keep my history</a>
                     </div>
-                </div>
-            <!-- buttons for past cities searched -->
-            <div id="past-cities"></div>
-            <div id="form-errors"></div>
-        </section>      
-
-        <main id="main-page">   
-
-            <!-- current city container -->
-            <div id="current-city"></div>   
-
-
-            <!-- weather -->
-            <div class="row hide" id="weather">
-                <div class="col s12 card-panel pink lighten-4 gradient-right">
-                    <h3>Three Day Forecast</h3>
-                    <div class="row" id="weather-row"></div>  
-                </div>
-            </div>  
-        
-
-            <!--holiday-->
-            <div class="row hide" id="holiday">
-                <div id="shane" class="col s12 card-panel pink lighten-1 gradient-left">
-                    <h3>Holidays</h3>
-                    <div class="col s12" id="holiday">
-                        <div class="card blue-grey">
-                        <div class="card-content white-text">
-                            <span class="card-title">Card Title</span>
-                            <p>I am a very simple card. I am good at containing small bits of information.
-                            I am convenient because I require little markup to use effectively.</p>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-            </div>  
-
-
-            <!-- Events-->
-            <div class="row hide" id="events">
-                <div class="col s12 card-panel pink lighten-4 gradient-right">
-                    <h3>Events</h3>
-                    <div class="row" id="event-row"></div> 
                 </div>
             </div>
 
+        <!-- buttons for past cities searched are put here -->
+        <div id="past-cities"></div>
+    </section> 
 
-            <!--Resturants/Food-->
-            <div class="row hide" id="food">
-                <div id="tyler" class="col s12 card-panel pink lighten-1 gradient-left">
-                    <h3>Resturantes/Food</h3>
-                    <div class="row" id="food-row">
-                        <div class="col s12 l4">
-                            <div class="card blue-grey z-depth-5">
-                                <div class="card-content white-text">
-                                    <span class="card-title">Card Title</span>
-                                    <p>I am a very simple card. I am good at containing small bits of information.
-                                    I am convenient because I require little markup to use effectively.</p>
-                                </div>
-                                <div class="card-action">
-                                    <a href="#">This is a link</a>
-                                    <a href="#">This is a link</a>
-                                </div>
+    <main id="main-page">
+
+      <!-- current city container -->
+        <div id="current-city"></div>
+
+        <!-- weather -->
+        <section class="row hide" id="weather">
+            <div class="col s12 card-panel N/A transparent">
+                <h3>Three Day Forecast</h3>
+                <div class="row" id="weather-row"></div> 
+            </div>
+        </section>
+
+        <!--holiday-->
+        <section class="row hide" id="holiday">
+            <div class="col s12 card-panel N/A transparent">
+                <h3>Holidays</h3>
+                <div class="col s12" id="holiday">
+                    <div class="card N/A transparent">
+                        <div class="card-content black-text" id="blue-holiday">
+                            <div id="blue-holiday0"></div>
+                            <div id="blue-holiday1"></div>
+                            <div id="blue-holiday2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+ 
+        <!-- Events-->
+        <section class="row hide" id="events">
+            <div class="col s12 card-panel N/A transparent ">
+                <h3>Events</h3>
+                <div class="row" id="event-row"></div> 
+            </div>
+        </section>
+
+        <!--Resturants/Food-->
+        <section class="row hide" id="food">
+            <div id="tyler" class="col s12 card-panel N/A transparent">
+                <h3>Restaurants/Food</h3>
+                <div class="row" id="food-row">
+                    <div class="col s12 l4">
+                        <div class="card N/A transparent z-depth-5">
+                            <div class="card-content black-text">
+                                <span class="card-title restaurant-title truncate"></span>
+                                <p class="restaurant-desc black-text truncate black-text"></p>
+                            </div>
+                            <div class="card-action">
+                                <a class="restaurant-link" href="#" target=_blank>Click here for more information</a>
                             </div>
                         </div>
-                    </div> 
+                    </div>
+                    <div class="col s12 l4">
+                        <div class="card N/A transparent z-depth-5">
+                            <div class="card-content black-text">
+                                <span class="card-title restaurant-title truncate"></span>
+                                <p class="restaurant-desc truncate black-text"></p>
+                            </div>
+                            <div class="card-action">
+                                <a class="restaurant-link center-align" href="#" target=_blank>Click here for more information</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12 l4">
+                        <div class="card N/A transparent z-depth-5">
+                            <div class="card-content white-text">
+                                <span class="card-title restaurant-title truncate black-text"></span>
+                                <p class="restaurant-desc truncate black-text"></p>
+                            </div>
+                            <div class="card-action">
+                                <a class="restaurant-link" href="#" target=_blank class="">Click here for more information</a>
+                            </div>
+                        </div>
+                    </div>
                 </div> 
-            </div>  
-        
+            </div> 
+        </section>
 
-            <!--Start of Victor's Div-->
-            <!-- <div class= "container"> -->
-                <div id = "cocktail" class = "row">
-                    <div id ="victor" class="col s12 card-panel pink lighten-4 z-depth-5">
-                        <h3>Cocktail</h3>
-                        <div class=" row col s12 blue-grey z-depth-5">
-                            <div>
-                                <h3 id = "drinkName" class = "card-title"></h3>
+        <!--Cocktail-->
+        <section class="row hide" id="cocktail">
+            <div class="col s12 card-panel N/A transparent z-depth-5 center-align">
+                <h3>Cocktail</h3>
+                <div class = "col s12 card N/A transparent z-depth-5">
+                    <h3 id = "drinkName" class="black-text"></h3>
+                    <div class="row">
+                        <div class="card-content col s12 l4">
+                            <img id="drink-image" class="card-image" style="width:100%; max-width: 250px;">
+                        </div>
+                        <div class="card-stacked col s12 l8">
+                            <div class="card-content">
+                                <p id="drink-glass" class="black-text"></p>
+                                <br>
+                                <div id="drink-ingredients" class="black-text"></div>
+                                <br>
+                                <p id="drink-instructions" class="black-text"></p>
                             </div>
-
-                        <!-- <div class = "card horizontal"> -->
-                            <!-- <div> -->
-                                <div class = "card-image">
-                                    <img id = "drinkImg" style= "width:100%; max-width:250px;">
-                                </div>
-                            <!-- </div>     -->
-                                <div class="card-stacked blue-grey" >
-                                    <div class="card-content">
-                                        <p id = "drinkGlass"></p>
-                                        <div id = "drinkIngredients"></div>
-                                        <p id = "drinkIns"></p>
-                                    </div>
-                                    <div class="card-action">
-                                        <a id="drink-button" class="waves-effect waves-light btn pink lighten-1" style="margin-top: 25px; margin-bottom: 25px;">Another Drink?</a>
-                                    </div>
-                                </div>
-                        <!-- </div> -->
-
+                            <div class="card-action">
+                                <a id="drink-button" class="waves-effect waves-light btn pink lighten-1" style="margin-top: 25px; margin-bottom: 25px;">Another Drink?</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            <!-- </div> -->
-            <!--End of Victor'd Div-->  
+            </div>
+        </section>
+    </main>
 
-                <!-- </div> -->
-        </main>
-            <footer class="page-footer pink lighten-4">
-                <div class="footer-copyright pink lighten-4">
-                    <div class="copyright-text pink lighten-4 blue-grey-text text-darken-4">
-                        © 2020 MaskD
-                    </div>
-                    <div class="link-container pink lighten-4">
-                        <a class="blue-grey-text text-darken-4 right link" href="https://github.com/berrytmt612"><img src="./assets/images/GitHub-Mark-32px.png"> Tyler Berry</a>
-                        <a class="blue-grey-text text-darken-4 right link" href="https://github.com/civ187"><img src="./assets/images/GitHub-Mark-32px.png"> Victor Lopez</a>
-                        <a class="blue-grey-text text-darken-4 right link" href="https://github.com/shanemcf"><img src="./assets/images/GitHub-Mark-32px.png"> Shane McFadden</a>
-                        <a class="blue-grey-text text-darken-4 right link" href="https://github.com/anniavd"><img src="./assets/images/GitHub-Mark-32px.png"> Annia Valdes</a>
-                        <a class="blue-grey-text text-darken-4 right link-right" href="https://github.com/joshuaweisbrodtorres"><img src="./assets/images/GitHub-Mark-32px.png"> Joshua Weisbrod-Torres</a>
-                    </div>
-                </div>
-            </footer>   
+    <footer class="page-footer pink lighten-4">
+        <div class="footer-copyright pink lighten-4">
+            <div class="copyright-text pink lighten-4 blue-grey-text text-darken-4">
+                © 2020 MaskD
+            </div>
+            <div class="link-container pink lighten-4 hide-on-small-only">
+                <a class="blue-grey-text text-darken-4 right link" href="https://github.com/berrytmt612"><img src="./assets/images/icons/GitHub-Mark-32px.png"> Tyler Berry</a>
+                <a class="blue-grey-text text-darken-4 right link" href="https://github.com/civ187"><img src="./assets/images/icons/GitHub-Mark-32px.png"> Victor Lopez</a>
+                <a class="blue-grey-text text-darken-4 right link" href="https://github.com/shanemcf"><img src="./assets/images/icons/GitHub-Mark-32px.png"> Shane McFadden</a>
+                <a class="blue-grey-text text-darken-4 right link" href="https://github.com/anniavd"><img src="./assets/images/icons/GitHub-Mark-32px.png"> Annia Valdes</a>
+                <a class="blue-grey-text text-darken-4 right link-right" href="https://github.com/joshuaweisbrodtorres"><img src="./assets/images/icons/GitHub-Mark-32px.png"> Joshua Weisbrod-Torres</a>
+            </div>
+        </div>
+      </footer>
 
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-            <script src="./assets/js/script.js"></script>
-    </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./assets/js/script.js"></script>
+</body>
 </html>
