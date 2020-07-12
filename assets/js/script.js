@@ -324,7 +324,7 @@ function showRestaurants(inputCity) {
 var showDrink = function (event) {
     //show card for cocktails
     document.getElementById("cocktail").className = "row show";
-
+    //API call from thecocktaildb
     fetch("https://www.thecocktaildb.com/api/json/v1/1/random.php").then(function (response) {
         response.json().then(function (data) {
 
@@ -352,11 +352,11 @@ var showDrink = function (event) {
             var drinkInstructions = data.drinks[0].strInstructions;
             drinkInstructionsEl.innerHTML = drinkInstructions;
 
-            // object bracket notation
+            // object bracket notation used
             // While statement is used to read ingredients and end when it hits a null value
             var i = 1;
             while (data.drinks[0]["strIngredient" + i]) {
-                var drinkMeasure = data.drinks[0]["strMeasure" + i];
+                //if statement formats ingredient list based on weather there is a measurement available
                 if (data.drinks[0]["strMeasure" + i] == null) {
                     drinkItem = data.drinks[0]["strIngredient" + i];
                 } else {
@@ -423,7 +423,7 @@ var resetPage = function () {
     document.getElementById("food").className = "row hide";
     document.getElementById("cocktail").className = "row hide";
 }
-
+// Calls for another drink without refreshing the entire page
 differentDrinkEl.addEventListener("click", function () {
     showDrink();
 });
