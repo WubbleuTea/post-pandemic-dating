@@ -295,7 +295,7 @@ function showRestaurants(inputCity) {
         })
         .done(function () {
 
-            //Get random restaurant from search results of this city
+            //Get random restaurant from search results of this specific city
             $.ajax({
                 url: 'https://developers.zomato.com/api/v2.1/search?entity_id=' + city_id + '&entity_type=city',
                 headers: { 'user-key': user_key }
